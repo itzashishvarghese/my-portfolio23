@@ -105,7 +105,7 @@ footer a{color:var(--red);text-decoration:none}
     <div class="hero-badge"><span class="hero-n">N</span><span class="hero-type">S E R I E S</span></div>
     <h1 class="hero-title">Stranger Things</h1>
     <p class="hero-desc">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.</p>
-    <div class="hero-btns"><button class="btn-play" onclick="playTrailer()"><i class="fa-solid fa-play"></i> Play</button><button class="btn-info" onclick="openModal(0)"><i class="fa-solid fa-circle-info"></i> More Info</button></div>
+    <div class="hero-btns"><button class="btn-play" onclick="playTrailer('b9EkMc79ZSU')"><i class="fa-solid fa-play"></i> Play</button><button class="btn-info" onclick="openModal(0)"><i class="fa-solid fa-circle-info"></i> More Info</button></div>
   </div>
   <div class="hero-maturity"><span class="maturity-badge">U/A 16+</span></div>
 </section>
@@ -120,7 +120,7 @@ footer a{color:var(--red);text-decoration:none}
       <h2 class="modal-title" id="modalTitle"></h2>
       <div class="modal-meta"><span class="match" id="modalMatch"></span><span id="modalYear"></span><span id="modalDur"></span><span id="modalRes">HD</span></div>
       <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-btns"><button class="btn-play" onclick="playTrailer()"><i class="fa-solid fa-play"></i> Play</button><button class="btn-info"><i class="fa-solid fa-plus"></i> My List</button></div>
+      <div class="modal-btns"><button class="btn-play" id="modalPlayBtn"><i class="fa-solid fa-play"></i> Play</button><button class="btn-info"><i class="fa-solid fa-plus"></i> My List</button></div>
     </div>
   </div>
 </div>
@@ -129,21 +129,21 @@ footer a{color:var(--red);text-decoration:none}
 
 <script>
 const movies=[
-  {title:'Stranger Things',year:2022,match:97,dur:'4 Seasons',genre:'Sci-Fi',desc:'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces.'},
-  {title:'Wednesday',year:2022,match:93,dur:'1 Season',genre:'Comedy',desc:'Wednesday Addams is sent to Nevermore Academy, where she attempts to master her emerging psychic ability.'},
-  {title:'Money Heist',year:2021,match:96,dur:'5 Parts',genre:'Thriller',desc:'An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history — stealing 2.4 billion euros.'},
-  {title:'Squid Game',year:2021,match:95,dur:'2 Seasons',genre:'Drama',desc:'Hundreds of cash-strapped players accept a strange invitation to compete in children\'s games for a tempting prize.'},
-  {title:'The Witcher',year:2023,match:89,dur:'3 Seasons',genre:'Fantasy',desc:'Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked.'},
-  {title:'Dark',year:2020,match:94,dur:'3 Seasons',genre:'Mystery',desc:'A missing child sets four families on a frantic hunt for answers as they unravel a mind-bending mystery across time.'},
-  {title:'Narcos',year:2017,match:91,dur:'3 Seasons',genre:'Crime',desc:'The true story of Colombia\'s infamously violent and powerful drug cartels fuels this riveting series.'},
-  {title:'Breaking Bad',year:2013,match:98,dur:'5 Seasons',genre:'Drama',desc:'A high school chemistry teacher turned methamphetamine manufacturer partners with a former student.'},
-  {title:'Peaky Blinders',year:2022,match:92,dur:'6 Seasons',genre:'Crime',desc:'A gangster family epic set in the lawless streets of post-World War I Birmingham.'},
-  {title:'The Crown',year:2023,match:88,dur:'6 Seasons',genre:'Drama',desc:'This drama follows the political rivalries and romance of Queen Elizabeth II\'s reign and the events that shaped the 20th century.'},
-  {title:'Ozark',year:2022,match:90,dur:'4 Seasons',genre:'Thriller',desc:'A financial advisor drags his family from Chicago to the Missouri Ozarks, where he must launder money.'},
-  {title:'Black Mirror',year:2023,match:93,dur:'6 Seasons',genre:'Sci-Fi',desc:'An anthology series exploring a twisted, high-tech multiverse where humanity\'s greatest innovations collide with darkest instincts.'},
-  {title:'House of Cards',year:2018,match:87,dur:'6 Seasons',genre:'Drama',desc:'A ruthless politician will stop at nothing to conquer Washington D.C. in this landmark political drama.'},
-  {title:'Lucifer',year:2021,match:86,dur:'6 Seasons',genre:'Fantasy',desc:'Bored with being the Lord of Hell, the Devil relocates to Los Angeles where he runs a nightclub.'},
-  {title:'Vikings',year:2020,match:91,dur:'6 Seasons',genre:'Action',desc:'The adventures of Ragnar Lothbrok, the greatest hero of his age, as he rises to become a king.'}
+  {title:'Stranger Things',year:2022,match:97,dur:'4 Seasons',genre:'Sci-Fi',vid:'b9EkMc79ZSU',desc:'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces.'},
+  {title:'Wednesday',year:2022,match:93,dur:'1 Season',genre:'Comedy',vid:'Di310WS8zLk',desc:'Wednesday Addams is sent to Nevermore Academy, where she attempts to master her emerging psychic ability.'},
+  {title:'Money Heist',year:2021,match:96,dur:'5 Parts',genre:'Thriller',vid:'_InqQJRqGW4',desc:'An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history — stealing 2.4 billion euros.'},
+  {title:'Squid Game',year:2021,match:95,dur:'2 Seasons',genre:'Drama',vid:'oqxAJKy0ii4',desc:'Hundreds of cash-strapped players accept a strange invitation to compete in children\'s games for a tempting prize.'},
+  {title:'The Witcher',year:2023,match:89,dur:'3 Seasons',genre:'Fantasy',vid:'ndl1W4ltcmg',desc:'Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked.'},
+  {title:'Dark',year:2020,match:94,dur:'3 Seasons',genre:'Mystery',vid:'rrwycJ08PSA',desc:'A missing child sets four families on a frantic hunt for answers as they unravel a mind-bending mystery across time.'},
+  {title:'Narcos',year:2017,match:91,dur:'3 Seasons',genre:'Crime',vid:'xl8zdCY-abw',desc:'The true story of Colombia\'s infamously violent and powerful drug cartels fuels this riveting series.'},
+  {title:'Breaking Bad',year:2013,match:98,dur:'5 Seasons',genre:'Drama',vid:'HhesaQXLuRY',desc:'A high school chemistry teacher turned methamphetamine manufacturer partners with a former student.'},
+  {title:'Peaky Blinders',year:2022,match:92,dur:'6 Seasons',genre:'Crime',vid:'oVzVdvGIC7U',desc:'A gangster family epic set in the lawless streets of post-World War I Birmingham.'},
+  {title:'The Crown',year:2023,match:88,dur:'6 Seasons',genre:'Drama',vid:'JWtnJjn6ng0',desc:'This drama follows the political rivalries and romance of Queen Elizabeth II\'s reign and the events that shaped the 20th century.'},
+  {title:'Ozark',year:2022,match:90,dur:'4 Seasons',genre:'Thriller',vid:'5hAXVqrljbs',desc:'A financial advisor drags his family from Chicago to the Missouri Ozarks, where he must launder money.'},
+  {title:'Black Mirror',year:2023,match:93,dur:'6 Seasons',genre:'Sci-Fi',vid:'5HLy27bK-wU',desc:'An anthology series exploring a twisted, high-tech multiverse where humanity\'s greatest innovations collide with darkest instincts.'},
+  {title:'House of Cards',year:2018,match:87,dur:'6 Seasons',genre:'Drama',vid:'8Qn_spdM5Zg',desc:'A ruthless politician will stop at nothing to conquer Washington D.C. in this landmark political drama.'},
+  {title:'Lucifer',year:2021,match:86,dur:'6 Seasons',genre:'Fantasy',vid:'X4bF_quwNtw',desc:'Bored with being the Lord of Hell, the Devil relocates to Los Angeles where he runs a nightclub.'},
+  {title:'Vikings',year:2020,match:91,dur:'6 Seasons',genre:'Action',vid:'9GgxinPwAGc',desc:'The adventures of Ragnar Lothbrok, the greatest hero of his age, as he rises to become a king.'}
 ];
 
 const categories=['Trending Now','Popular on Netflix','Top Rated','Critically Acclaimed','Action & Adventure','Sci-Fi & Fantasy'];
@@ -165,7 +165,7 @@ categories.forEach((cat,ci)=>{
     rowSection.innerHTML+=html;
   } else {
     let html=`<div class="row"><div class="row-title">${cat}<span class="see-all">Explore All ›</span></div><div class="row-scroll">`;
-    rowMovies.forEach((m,i)=>{const mi=(start+i)%movies.length;html+=`<div class="card" onclick="openModal(${mi})"><img src="${getImg(mi)}" alt="${m.title}" loading="lazy">${ci===0?`<div class="card-rank">#${i+1}</div>`:''}<div class="card-overlay"><div class="card-title">${m.title}</div><div class="card-meta"><span class="match">${m.match}% Match</span><span>${m.year}</span><span>${m.genre}</span></div><div class="card-icons"><button><i class="fa-solid fa-play"></i></button><button><i class="fa-solid fa-plus"></i></button><button><i class="fa-solid fa-thumbs-up"></i></button></div></div></div>`});
+    rowMovies.forEach((m,i)=>{const mi=(start+i)%movies.length;html+=`<div class="card" onclick="openModal(${mi})"><img src="${getImg(mi)}" alt="${m.title}" loading="lazy">${ci===0?`<div class="card-rank">#${i+1}</div>`:''}<div class="card-overlay"><div class="card-title">${m.title}</div><div class="card-meta"><span class="match">${m.match}% Match</span><span>${m.year}</span><span>${m.genre}</span></div><div class="card-icons"><button onclick="playTrailer('${m.vid}'); event.stopPropagation()"><i class="fa-solid fa-play"></i></button><button><i class="fa-solid fa-plus"></i></button><button><i class="fa-solid fa-thumbs-up"></i></button></div></div></div>`});
     html+=`</div></div>`;
     rowSection.innerHTML+=html;
   }
@@ -180,6 +180,7 @@ function openModal(i){
   document.getElementById('modalYear').textContent=m.year;
   document.getElementById('modalDur').textContent=m.dur;
   document.getElementById('modalDesc').textContent=m.desc;
+  document.getElementById('modalPlayBtn').onclick = () => { playTrailer(m.vid); closeModal({target:{id:'modal'}}); };
   document.getElementById('modal').classList.add('show');
 }
 function closeModal(e){if(e.target.id==='modal')document.getElementById('modal').classList.remove('show')}
@@ -194,12 +195,14 @@ function searchMovies(){
   // Simple search highlight
 }
 
-// Play trailer simulation
-function playTrailer(){
+// Play real trailer
+function playTrailer(videoId){
   const overlay=document.createElement('div');
-  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer';
-  overlay.innerHTML=`<div style="font-size:60px;margin-bottom:20px;animation:pulse 1.5s infinite"><i class="fa-solid fa-play-circle"></i></div><div style="font-size:18px;font-weight:600">Now Playing</div><div style="font-size:14px;color:#999;margin-top:8px">Click anywhere to close</div><style>@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.7}}</style>`;
-  overlay.onclick=()=>overlay.remove();
+  overlay.style.cssText='position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
+  overlay.innerHTML=`
+    <button style="position:absolute;top:20px;right:30px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:24px;cursor:pointer;z-index:10001;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:0.3s" onmouseover="this.style.background='rgba(229,9,20,0.8)';this.style.borderColor='#e50914'" onmouseout="this.style.background='rgba(0,0,0,0.5)';this.style.borderColor='rgba(255,255,255,0.2)'" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%"></iframe>
+  `;
   document.body.appendChild(overlay);
 }
 </script>
