@@ -147,49 +147,87 @@ const h=new Date().getHours();
 document.getElementById("greeting").textContent=h<12?"Good morning":h<18?"Good afternoon":"Good evening";
 
 const songs=[
-  {title:"Blinding Lights",artist:"The Weeknd",img:"https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647",duration:"3:20",color:"#4a1a2e"},
-  {title:"Levitating",artist:"Dua Lipa",img:"https://i.scdn.co/image/ab67616d00004851d4daf28d55fe4197ede848be",duration:"3:23",color:"#2a3a5e"},
-  {title:"Shape of You",artist:"Ed Sheeran",img:"https://i.scdn.co/image/ab67616d00004851ba5db46f4b838ef6027e6f96",duration:"3:53",color:"#3a2a1e"},
-  {title:"Stay",artist:"The Kid LAROI, Justin Bieber",img:"https://i.scdn.co/image/ab67616d000048512a00e47c5b502f5ac2c2e4b5",duration:"2:21",color:"#5a2a4e"},
-  {title:"Heat Waves",artist:"Glass Animals",img:"https://i.scdn.co/image/ab67616d00004851712701c5e263efc8726b1464",duration:"3:58",color:"#1a4a3e"},
-  {title:"Starboy",artist:"The Weeknd, Daft Punk",img:"https://i.scdn.co/image/ab67616d00004851a048415d3f7752c0fd4b3e59",duration:"3:50",color:"#2a1a2e"},
-  {title:"Sunflower",artist:"Post Malone, Swae Lee",img:"https://i.scdn.co/image/ab67616d00004851e2e352d89826aef6dbd5ff8f",duration:"2:38",color:"#5a4a1e"},
-  {title:"Save Your Tears",artist:"The Weeknd",img:"https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647",duration:"3:35",color:"#3a1a4e"},
+  {title:"Blinding Lights",artist:"The Weeknd",img:"https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647",color:"#4a1a2e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+  {title:"Levitating",artist:"Dua Lipa",img:"https://i.scdn.co/image/ab67616d00004851d4daf28d55fe4197ede848be",color:"#2a3a5e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+  {title:"Shape of You",artist:"Ed Sheeran",img:"https://i.scdn.co/image/ab67616d00004851ba5db46f4b838ef6027e6f96",color:"#3a2a1e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+  {title:"Stay",artist:"The Kid LAROI, Justin Bieber",img:"https://i.scdn.co/image/ab67616d000048512a00e47c5b502f5ac2c2e4b5",color:"#5a2a4e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
+  {title:"Heat Waves",artist:"Glass Animals",img:"https://i.scdn.co/image/ab67616d00004851712701c5e263efc8726b1464",color:"#1a4a3e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"},
+  {title:"Starboy",artist:"The Weeknd, Daft Punk",img:"https://i.scdn.co/image/ab67616d00004851a048415d3f7752c0fd4b3e59",color:"#2a1a2e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"},
+  {title:"Sunflower",artist:"Post Malone, Swae Lee",img:"https://i.scdn.co/image/ab67616d00004851e2e352d89826aef6dbd5ff8f",color:"#5a4a1e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"},
+  {title:"Save Your Tears",artist:"The Weeknd",img:"https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647",color:"#3a1a4e", src:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"},
 ];
-let currentSong=0,isPlaying=false,progressInterval;
+let currentSong=0,isPlaying=false;
+const audio = document.getElementById("audio");
 
-function formatTime(s){return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0")}
-function parseDur(d){const p=d.split(":");return+p[0]*60+(+p[1])}
+function formatTime(s){
+  if(isNaN(s)) return "0:00";
+  return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
+}
 
 function updateNowPlaying(){
   const s=songs[currentSong];
   document.getElementById("nowImg").src=s.img;
   document.getElementById("nowSong").textContent=s.title;
   document.getElementById("nowArtist").textContent=s.artist;
-  document.getElementById("totTime").textContent=s.duration;
   document.getElementById("mainContent").style.setProperty("--gradient-color",s.color);
+  if(audio.src !== s.src){
+    audio.src = s.src;
+  }
 }
 
-let fakeProgress=0,totalDur;
 function togglePlay(){
-  isPlaying=!isPlaying;
+  if(audio.paused){
+    audio.play().catch(e=>console.log(e));
+    isPlaying=true;
+  }else{
+    audio.pause();
+    isPlaying=false;
+  }
   document.getElementById("playIcon").className=isPlaying?"fa-solid fa-pause":"fa-solid fa-play";
   document.getElementById("nowImg").classList.toggle("spin",isPlaying);
-  if(isPlaying){
-    totalDur=parseDur(songs[currentSong].duration);
-    progressInterval=setInterval(()=>{
-      fakeProgress+=0.5;
-      if(fakeProgress>=totalDur){fakeProgress=0;nextSong();return}
-      document.getElementById("progressFill").style.width=(fakeProgress/totalDur*100)+"%";
-      document.getElementById("curTime").textContent=formatTime(fakeProgress);
-    },500);
-  }else{clearInterval(progressInterval)}
 }
-function nextSong(){clearInterval(progressInterval);fakeProgress=0;currentSong=(currentSong+1)%songs.length;updateNowPlaying();if(isPlaying){isPlaying=false;togglePlay()}}
-function prevSong(){clearInterval(progressInterval);fakeProgress=0;currentSong=(currentSong-1+songs.length)%songs.length;updateNowPlaying();if(isPlaying){isPlaying=false;togglePlay()}}
 
-document.getElementById("progressTrack").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const pct=(e.clientX-r.left)/r.width;totalDur=parseDur(songs[currentSong].duration);fakeProgress=pct*totalDur;document.getElementById("progressFill").style.width=(pct*100)+"%";document.getElementById("curTime").textContent=formatTime(fakeProgress)});
-document.getElementById("volTrack").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const pct=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));document.getElementById("volFill").style.width=(pct*100)+"%"});
+audio.addEventListener("timeupdate", () => {
+  if(!audio.duration) return;
+  const pct = (audio.currentTime / audio.duration) * 100;
+  document.getElementById("progressFill").style.width = pct + "%";
+  document.getElementById("curTime").textContent = formatTime(audio.currentTime);
+});
+
+audio.addEventListener("loadedmetadata", () => {
+  document.getElementById("totTime").textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener("ended", () => {
+  nextSong();
+});
+
+function nextSong(){
+  currentSong=(currentSong+1)%songs.length;
+  updateNowPlaying();
+  if(isPlaying) audio.play();
+}
+
+function prevSong(){
+  currentSong=(currentSong-1+songs.length)%songs.length;
+  updateNowPlaying();
+  if(isPlaying) audio.play();
+}
+
+document.getElementById("progressTrack").addEventListener("click",e=>{
+  const r=e.currentTarget.getBoundingClientRect();
+  const pct=(e.clientX-r.left)/r.width;
+  if(audio.duration) {
+    audio.currentTime = pct * audio.duration;
+  }
+});
+
+document.getElementById("volTrack").addEventListener("click",e=>{
+  const r=e.currentTarget.getBoundingClientRect();
+  const pct=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));
+  audio.volume = pct;
+  document.getElementById("volFill").style.width=(pct*100)+"%";
+});
 
 // Playlists
 const pls=[{name:"Liked Songs",type:"Playlist",img:"https://misc.scdn.co/liked-songs/liked-songs-640.png"},{name:"Daily Mix 1",type:"Playlist · Spotify",img:"https://picsum.photos/seed/sp1/100"},{name:"Chill Vibes",type:"Playlist · 45 songs",img:"https://picsum.photos/seed/sp2/100"},{name:"Workout Beats",type:"Playlist · 78 songs",img:"https://picsum.photos/seed/sp3/100"},{name:"Bollywood Hits",type:"Playlist · 120 songs",img:"https://picsum.photos/seed/sp4/100"},{name:"Coding Flow",type:"Playlist · 56 songs",img:"https://picsum.photos/seed/sp5/100"},{name:"Lo-fi Study",type:"Playlist · 89 songs",img:"https://picsum.photos/seed/sp6/100"},{name:"Arijit Singh",type:"Artist",img:"https://picsum.photos/seed/art1/100",round:true}];
