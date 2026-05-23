@@ -35,18 +35,35 @@ nav{position:fixed;top:0;width:100%;height:44px;background:rgba(0,0,0,.8);backdr
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 /* Phone */
 .phone-showcase{margin:50px auto 0;position:relative;display:flex;justify-content:center;align-items:center}
-.phone{width:260px;height:528px;border-radius:44px;position:relative;overflow:hidden;transition:all .6s ease}
-.phone.natural{background:linear-gradient(145deg,#83817b,#504f4b);border:3px solid #6b6961;box-shadow:0 30px 80px rgba(131,129,123,.15)}
-.phone.blue{background:linear-gradient(145deg,#394d63,#2a3a4e);border:3px solid #4a6175;box-shadow:0 30px 80px rgba(57,77,99,.2)}
-.phone.white{background:linear-gradient(145deg,#e8e5df,#d1cec8);border:3px solid #d5d2cc;box-shadow:0 30px 80px rgba(232,229,223,.15)}
-.phone.black{background:linear-gradient(145deg,#2e2e30,#1a1a1c);border:3px solid #3a3a3c;box-shadow:0 30px 80px rgba(46,46,48,.3)}
-.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:30px;background:#000;border-radius:0 0 18px 18px;z-index:5}
-.phone-screen{width:100%;height:100%;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative}
-.phone-time{font-size:60px;font-weight:200;letter-spacing:-2px;z-index:2}
+.phone{width:280px;height:570px;border-radius:50px;position:relative;overflow:hidden;transition:all .6s ease}
+.phone.natural{background:linear-gradient(160deg,#a09d93,#83817b,#6b6961);border:4px solid #8c8a82;box-shadow:0 40px 100px rgba(131,129,123,.25),inset 0 0 0 1px rgba(255,255,255,.08)}
+.phone.blue{background:linear-gradient(160deg,#4d6a85,#394d63,#2a3a4e);border:4px solid #5a7a95;box-shadow:0 40px 100px rgba(57,77,99,.3),inset 0 0 0 1px rgba(100,160,255,.1)}
+.phone.white{background:linear-gradient(160deg,#f5f3ed,#e8e5df,#dbd8d2);border:4px solid #eae7e1;box-shadow:0 40px 100px rgba(200,200,200,.25),inset 0 0 0 1px rgba(255,255,255,.3)}
+.phone.black{background:linear-gradient(160deg,#3e3e40,#2e2e30,#1a1a1c);border:4px solid #444446;box-shadow:0 40px 100px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}
+.phone-side-btn{position:absolute;right:-5px;top:140px;width:4px;height:50px;border-radius:0 3px 3px 0;z-index:6;transition:background .6s}
+.phone.natural .phone-side-btn{background:#83817b}.phone.blue .phone-side-btn{background:#4a6175}.phone.white .phone-side-btn{background:#d5d2cc}.phone.black .phone-side-btn{background:#3a3a3c}
+.phone-vol{position:absolute;left:-5px;z-index:6;width:4px;border-radius:3px 0 0 3px;transition:background .6s}
+.phone-vol-up{top:120px;height:35px}
+.phone-vol-down{top:165px;height:35px}
+.phone.natural .phone-vol{background:#83817b}.phone.blue .phone-vol{background:#4a6175}.phone.white .phone-vol{background:#d5d2cc}.phone.black .phone-vol{background:#3a3a3c}
+.phone-island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:100px;height:28px;background:#111;border-radius:20px;z-index:5;display:flex;align-items:center;justify-content:flex-end;padding-right:10px}
+.phone-island-cam{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#1a3050,#0a1520);border:1px solid #222}
+.phone-screen{width:100%;height:100%;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;border-radius:46px}
+.phone-time{font-size:64px;font-weight:200;letter-spacing:-2px;z-index:2}
 .phone-date{font-size:16px;color:#999;margin-top:4px;z-index:2}
-.phone-wallpaper{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(41,151,255,.12),transparent 60%);z-index:1}
+.phone-wallpaper{position:absolute;inset:0;border-radius:46px;z-index:1;overflow:hidden;transition:background .6s}
+.phone.natural .phone-wallpaper{background:radial-gradient(ellipse at 50% 30%,rgba(160,140,100,.15),transparent 60%)}
+.phone.blue .phone-wallpaper{background:radial-gradient(ellipse at 50% 30%,rgba(60,130,220,.18),transparent 60%)}
+.phone.white .phone-wallpaper{background:radial-gradient(ellipse at 50% 30%,rgba(200,200,220,.12),transparent 60%)}
+.phone.black .phone-wallpaper{background:radial-gradient(ellipse at 50% 30%,rgba(80,80,100,.12),transparent 60%)}
 .phone-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:4px;background:#fff;border-radius:4px;opacity:.4;z-index:5}
-.phone-glow{position:absolute;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(41,151,255,.06),transparent);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.phone-glow{position:absolute;width:500px;height:500px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;transition:background .6s}
+.phone-glow.natural{background:radial-gradient(circle,rgba(160,140,100,.08),transparent)}
+.phone-glow.blue{background:radial-gradient(circle,rgba(60,130,220,.1),transparent)}
+.phone-glow.white{background:radial-gradient(circle,rgba(200,200,220,.06),transparent)}
+.phone-glow.black{background:radial-gradient(circle,rgba(80,80,120,.06),transparent)}
+.phone-cam{position:absolute;top:16px;left:16px;z-index:3;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:8px;background:rgba(0,0,0,.3);border-radius:16px;backdrop-filter:blur(4px);opacity:0}
+.cam-lens{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#334,#111);border:2px solid #222;box-shadow:inset 0 0 3px rgba(100,100,200,.3)}
 /* Color Picker */
 .color-picker{display:flex;justify-content:center;gap:18px;margin-top:40px}
 .color-dot{width:32px;height:32px;border-radius:50%;cursor:pointer;transition:.3s;border:2px solid transparent;position:relative}
@@ -91,13 +108,22 @@ nav{position:fixed;top:0;width:100%;height:44px;background:rgba(0,0,0,.8);backdr
 .spec-label{font-size:14px;color:#86868b;margin-top:6px}
 /* Compare */
 .compare-section{padding:80px 5%;text-align:center}
-.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:40px auto 0}
-.compare-card{background:#1d1d1f;border-radius:20px;padding:30px 20px;border:1px solid transparent;transition:.3s;cursor:pointer}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:40px auto 0}
+.compare-card{background:#1d1d1f;border-radius:20px;padding:30px 20px 20px;border:1px solid transparent;transition:.3s;cursor:pointer;display:flex;flex-direction:column;align-items:center}
 .compare-card:hover,.compare-card.selected{border-color:rgba(41,151,255,.3);transform:translateY(-4px)}
 .compare-card.selected{box-shadow:0 8px 30px rgba(41,151,255,.15)}
-.compare-emoji{font-size:60px;margin-bottom:12px}
+.compare-phone{width:70px;height:140px;border-radius:16px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;font-size:24px;position:relative;overflow:hidden}
+.compare-phone::after{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:24px;height:8px;background:rgba(0,0,0,.6);border-radius:6px}
 .compare-name{font-size:18px;font-weight:700;margin-bottom:4px}
-.compare-price{font-size:15px;color:#86868b}
+.compare-price{font-size:21px;font-weight:800;margin:8px 0 4px;background:linear-gradient(135deg,#2997ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.compare-monthly{font-size:12px;color:#86868b;margin-bottom:16px}
+.compare-specs{width:100%;text-align:left}
+.spec-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.spec-row:last-child{border:none}
+.spec-key{color:#86868b}
+.spec-value{font-weight:600;text-align:right}
+.spec-value .yes{color:#1DB954}
+.spec-value .no{color:#555}
 .compare-chip{margin-top:12px;padding:6px 14px;background:rgba(41,151,255,.1);color:#2997ff;border-radius:20px;font-size:12px;font-weight:600;display:inline-block}
 /* CTA */
 .cta-section{padding:100px 5%;text-align:center}
@@ -125,12 +151,12 @@ footer a{color:#2997ff;text-decoration:none}
   <p class="hero-sub">Titanium. So strong. So light. So Pro.</p>
   <p class="hero-price">From ₹1,34,900.00*</p>
   <div class="hero-btns"><a href="#cta" class="btn-primary">Buy</a><a href="#features" class="btn-sec">Learn more ›</a></div>
-  <div class="phone-showcase"><div class="phone-glow"></div><div class="phone natural" id="phoneDevice"><div class="phone-notch"></div><div class="phone-screen"><div class="phone-wallpaper"></div><div class="phone-time" id="phoneTime">9:41</div><div class="phone-date" id="phoneDate">Friday, May 23</div></div><div class="phone-bar"></div></div></div>
+  <div class="phone-showcase"><div class="phone-glow natural" id="phoneGlow"></div><div class="phone natural" id="phoneDevice"><div class="phone-side-btn"></div><div class="phone-vol phone-vol-up"></div><div class="phone-vol phone-vol-down"></div><div class="phone-island"><div class="phone-island-cam"></div></div><div class="phone-screen"><div class="phone-wallpaper"></div><div class="phone-time" id="phoneTime">9:41</div><div class="phone-date" id="phoneDate">Friday, May 23</div></div><div class="phone-bar"></div></div></div>
   <div class="color-picker" id="colorPicker">
-    <div class="color-dot active" style="background:#83817b" data-color="natural" data-name="Natural Titanium" onclick="changeColor(this)"></div>
-    <div class="color-dot" style="background:#394d63" data-color="blue" data-name="Blue Titanium" onclick="changeColor(this)"></div>
-    <div class="color-dot" style="background:#e8e5df" data-color="white" data-name="White Titanium" onclick="changeColor(this)"></div>
-    <div class="color-dot" style="background:#2e2e30" data-color="black" data-name="Black Titanium" onclick="changeColor(this)"></div>
+    <div class="color-dot active" style="background:linear-gradient(145deg,#a09d93,#6b6961)" data-color="natural" data-name="Natural Titanium" onclick="changeColor(this)"></div>
+    <div class="color-dot" style="background:linear-gradient(145deg,#4d6a85,#2a3a4e)" data-color="blue" data-name="Blue Titanium" onclick="changeColor(this)"></div>
+    <div class="color-dot" style="background:linear-gradient(145deg,#f5f3ed,#dbd8d2)" data-color="white" data-name="White Titanium" onclick="changeColor(this)"></div>
+    <div class="color-dot" style="background:linear-gradient(145deg,#3e3e40,#1a1a1c)" data-color="black" data-name="Black Titanium" onclick="changeColor(this)"></div>
   </div>
   <div class="color-label" id="colorLabel">Color: <span>Natural Titanium</span></div>
 </section>
@@ -196,8 +222,9 @@ tick();setInterval(tick,1000);
 function changeColor(el){
   document.querySelectorAll(".color-dot").forEach(d=>d.classList.remove("active"));
   el.classList.add("active");
-  const phone=document.getElementById("phoneDevice");
-  phone.className="phone "+el.dataset.color;
+  const c=el.dataset.color;
+  document.getElementById("phoneDevice").className="phone "+c;
+  document.getElementById("phoneGlow").className="phone-glow "+c;
   document.getElementById("colorLabel").innerHTML="Color: <span>"+el.dataset.name+"</span>";
 }
 
@@ -220,10 +247,15 @@ renderCam("all");
 const specs=[{val:48,unit:"MP",label:"Main Camera"},{val:6,unit:".7\"",label:"Display"},{val:120,unit:"Hz",label:"ProMotion"},{val:29,unit:"hrs",label:"Video Playback"},{val:3,unit:"nm",label:"A17 Pro Chip"},{val:20,unit:"x",label:"USB 3 Speed"}];
 document.getElementById("specsGrid").innerHTML=specs.map(s=>`<div class="spec-card reveal"><div class="spec-val" data-target="${s.val}">0<span class="spec-unit">${s.unit}</span></div><div class="spec-label">${s.label}</div></div>`).join("");
 
-// Compare
-const models=[{name:"iPhone 15 Pro Max",price:"₹1,59,900",emoji:"📱",chip:"A17 Pro"},{name:"iPhone 15 Pro",price:"₹1,34,900",emoji:"📱",chip:"A17 Pro"},{name:"iPhone 15",price:"₹79,900",emoji:"📱",chip:"A16 Bionic"}];
-document.getElementById("compareGrid").innerHTML=models.map((m,i)=>`<div class="compare-card reveal${i===1?" selected":""}" onclick="selectCompare(this)"><div class="compare-emoji">${m.emoji}</div><div class="compare-name">${m.name}</div><div class="compare-price">${m.price}</div><div class="compare-chip">${m.chip}</div></div>`).join("");
-function selectCompare(el){document.querySelectorAll(".compare-card").forEach(c=>c.classList.remove("selected"));el.classList.add("selected")}
+// Compare with full specs
+const models=[
+  {name:"iPhone 15 Pro Max",price:"₹1,59,900",monthly:"or ₹13,325/mo.",color:"#394d63",border:"#4a6175",specs:{display:'6.7"',chip:'A17 Pro',camera:'48MP Triple',battery:'29 hrs',usb:'USB-C (USB 3)',material:'Titanium',weight:'221 g',water:'IP68',face:'✓',magsafe:'✓',prores:'✓',sos:'✓'}},
+  {name:"iPhone 15 Pro",price:"₹1,34,900",monthly:"or ₹11,241/mo.",color:"#83817b",border:"#8c8a82",specs:{display:'6.1"',chip:'A17 Pro',camera:'48MP Triple',battery:'23 hrs',usb:'USB-C (USB 3)',material:'Titanium',weight:'187 g',water:'IP68',face:'✓',magsafe:'✓',prores:'✓',sos:'✓'}},
+  {name:"iPhone 15",price:"₹79,900",monthly:"or ₹6,658/mo.",color:"#e8e5df",border:"#d5d2cc",specs:{display:'6.1"',chip:'A16 Bionic',camera:'48MP Dual',battery:'20 hrs',usb:'USB-C (USB 2)',material:'Aluminum',weight:'171 g',water:'IP68',face:'✓',magsafe:'✓',prores:'✗',sos:'✓'}}
+];
+const specLabels={display:'Display',chip:'Chip',camera:'Camera',battery:'Battery',usb:'Connector',material:'Material',weight:'Weight',water:'Water Resist.',face:'Face ID',magsafe:'MagSafe',prores:'ProRes Video',sos:'Emergency SOS'};
+document.getElementById("compareGrid").innerHTML=models.map((m,i)=>{let specRows=Object.keys(specLabels).map(k=>`<div class="spec-row"><span class="spec-key">${specLabels[k]}</span><span class="spec-value">${m.specs[k]==='✓'?'<span class="yes">✓ Yes</span>':m.specs[k]==='✗'?'<span class="no">✗ No</span>':m.specs[k]}</span></div>`).join('');return`<div class="compare-card reveal${i===1?' selected':''}" onclick="selectCompare(this)"><div class="compare-phone" style="background:linear-gradient(160deg,${m.color},${m.border});border:2px solid ${m.border}"></div><div class="compare-name">${m.name}</div><div class="compare-price">${m.price}</div><div class="compare-monthly">${m.monthly}</div><div class="compare-specs">${specRows}</div></div>`}).join('');
+function selectCompare(el){document.querySelectorAll('.compare-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
 
 // Add to cart
 function addToCart(e){
