@@ -4,139 +4,215 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spotify Clone | Ashish Varghese</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:#121212;color:#fff;overflow:hidden;height:100vh}
-.back-link{position:fixed;top:10px;right:20px;z-index:200;color:#1DB954;font-size:13px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:.3s}.back-link:hover{opacity:.7}
-.app{display:grid;grid-template-columns:280px 1fr;grid-template-rows:1fr 90px;height:100vh}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#000;color:#fff;overflow:hidden;height:100vh;user-select:none}
+.back-link{position:fixed;top:10px;right:16px;z-index:999;color:#1DB954;font-size:12px;text-decoration:none;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.7);padding:6px 14px;border-radius:20px;transition:.3s;backdrop-filter:blur(10px)}.back-link:hover{background:rgba(29,185,84,.15)}
+.app{display:grid;grid-template-columns:280px 1fr;grid-template-rows:1fr 80px;height:100vh}
 /* Sidebar */
-.sidebar{background:#000;padding:8px;overflow-y:auto;grid-row:1/2}
+.sidebar{background:#000;padding:8px;overflow-y:auto;grid-row:1/2;display:flex;flex-direction:column;gap:8px}
 .sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
-.sidebar-section{background:#121212;border-radius:8px;padding:16px;margin-bottom:8px}
-.logo{display:flex;align-items:center;gap:8px;margin-bottom:20px}
-.logo i{color:#1DB954;font-size:28px}
-.logo span{font-size:22px;font-weight:700}
-.nav-item{display:flex;align-items:center;gap:16px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;color:#b3b3b3;transition:.2s;text-decoration:none}
-.nav-item:hover,.nav-item.active{color:#fff}
-.nav-item i{width:24px;text-align:center;font-size:20px}
-.library-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.library-header h3{font-size:15px;display:flex;align-items:center;gap:10px;color:#b3b3b3}
-.library-header button{background:none;border:none;color:#b3b3b3;font-size:18px;cursor:pointer}
-.playlist-item{display:flex;align-items:center;gap:12px;padding:8px;border-radius:6px;cursor:pointer;transition:.2s}
-.playlist-item:hover{background:rgba(255,255,255,.1)}
-.playlist-img{width:48px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0}
-.playlist-name{font-size:14px;font-weight:500}
-.playlist-type{font-size:12px;color:#b3b3b3}
-/* Main Content */
-.main-content{overflow-y:auto;padding:24px 32px;background:linear-gradient(180deg,#1a3a2a 0%,#121212 300px)}
-.main-content::-webkit-scrollbar{width:6px}.main-content::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
-.greeting{font-size:28px;font-weight:700;margin-bottom:20px}
-.card-row{margin-bottom:32px}
-.card-row h2{font-size:22px;font-weight:700;margin-bottom:16px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px}
-.card{background:rgba(255,255,255,.05);border-radius:8px;padding:16px;cursor:pointer;transition:.3s;position:relative}
+.sb-box{background:#121212;border-radius:8px;padding:12px}
+.logo{display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:8px}
+.logo svg{width:32px;height:32px}
+.logo span{font-size:24px;font-weight:700;letter-spacing:-.5px}
+.nav-link{display:flex;align-items:center;gap:20px;padding:10px 12px;border-radius:6px;cursor:pointer;font-size:15px;font-weight:600;color:#b3b3b3;transition:.2s}
+.nav-link:hover,.nav-link.active{color:#fff}
+.nav-link i{font-size:22px;width:24px;text-align:center}
+.lib-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px}
+.lib-header span{font-size:15px;font-weight:700;color:#b3b3b3;display:flex;align-items:center;gap:10px}
+.lib-header span i{font-size:18px}
+.lib-header button{background:none;border:none;color:#b3b3b3;font-size:20px;cursor:pointer;width:32px;height:32px;border-radius:50%;transition:.2s}.lib-header button:hover{background:#1a1a1a;color:#fff}
+.lib-chips{display:flex;gap:6px;padding:8px 12px}
+.lib-chip{padding:6px 12px;background:#232323;border:none;border-radius:16px;color:#fff;font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:.2s}
+.lib-chip:hover{background:#2a2a2a}
+.pl-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:6px;cursor:pointer;transition:.2s}
+.pl-item:hover{background:rgba(255,255,255,.07)}
+.pl-item.active{background:rgba(255,255,255,.1)}
+.pl-img{width:48px;height:48px;border-radius:4px;object-fit:cover;flex-shrink:0}
+.pl-img.round{border-radius:50%}
+.pl-name{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-type{font-size:12px;color:#b3b3b3}
+/* Main */
+.main{overflow-y:auto;background:linear-gradient(180deg,var(--gradient-color,#1a3a2a) 0%,#121212 380px);transition:background .6s}
+.main::-webkit-scrollbar{width:8px}.main::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:4px}
+.main-pad{padding:24px 32px 100px}
+.greeting{font-size:32px;font-weight:800;margin-bottom:24px}
+/* Quick Picks */
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:36px}
+.quick{display:flex;align-items:center;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;cursor:pointer;transition:.2s;height:60px;position:relative}
+.quick:hover{background:rgba(255,255,255,.15)}
+.quick:hover .quick-play{opacity:1}
+.quick img{width:60px;height:60px;object-fit:cover}
+.quick span{padding:0 16px;font-size:14px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quick-play{position:absolute;right:12px;width:40px;height:40px;border-radius:50%;background:#1DB954;border:none;color:#000;font-size:16px;cursor:pointer;opacity:0;transition:.3s;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+/* Card Sections */
+.section{margin-bottom:32px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.section-head h2{font-size:24px;font-weight:700;cursor:pointer}.section-head h2:hover{text-decoration:underline}
+.section-head a{font-size:14px;font-weight:700;color:#b3b3b3;text-decoration:none;letter-spacing:.5px}
+.section-head a:hover{text-decoration:underline}
+.card-scroll{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:24px}
+.card{background:rgba(255,255,255,.04);border-radius:8px;padding:16px;cursor:pointer;transition:.3s;position:relative}
 .card:hover{background:rgba(255,255,255,.1)}
-.card:hover .play-btn{opacity:1;transform:translateY(-8px)}
-.card-img{width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;margin-bottom:12px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
-.card-title{font-size:14px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-desc{font-size:12px;color:#b3b3b3;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.play-btn{position:absolute;right:16px;bottom:80px;width:48px;height:48px;border-radius:50%;background:#1DB954;border:none;color:#000;font-size:20px;cursor:pointer;opacity:0;transform:translateY(0);transition:.3s;box-shadow:0 8px 16px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}
-/* Quick picks */
-.quick-picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:32px}
-.quick-card{display:flex;align-items:center;background:rgba(255,255,255,.07);border-radius:6px;overflow:hidden;cursor:pointer;transition:.2s;height:56px}
-.quick-card:hover{background:rgba(255,255,255,.15)}
-.quick-card img{width:56px;height:56px;object-fit:cover}
-.quick-card span{padding:0 16px;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Player */
-.player{grid-column:1/-1;background:#181818;border-top:1px solid #282828;display:grid;grid-template-columns:280px 1fr 280px;align-items:center;padding:0 16px}
-.player-left{display:flex;align-items:center;gap:14px}
-.now-playing-img{width:56px;height:56px;border-radius:4px;object-fit:cover}
-.now-playing-info .song-name{font-size:13px;font-weight:500}
-.now-playing-info .artist-name{font-size:11px;color:#b3b3b3}
-.player-left .like-btn{background:none;border:none;color:#b3b3b3;font-size:16px;cursor:pointer;margin-left:8px;transition:.2s}
-.player-left .like-btn:hover,.player-left .like-btn.liked{color:#1DB954}
-.player-center{display:flex;flex-direction:column;align-items:center;gap:8px}
-.player-controls{display:flex;align-items:center;gap:16px}
-.player-controls button{background:none;border:none;color:#b3b3b3;font-size:16px;cursor:pointer;transition:.2s}
-.player-controls button:hover{color:#fff}
-.play-pause{width:36px;height:36px;border-radius:50%;background:#fff;color:#000;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:.1s}
-.play-pause:hover{transform:scale(1.05)}
-.progress-bar{display:flex;align-items:center;gap:8px;width:100%;max-width:600px}
-.progress-bar .time{font-size:11px;color:#b3b3b3;min-width:35px;text-align:center}
-.progress-track{flex:1;height:4px;background:#4d4d4d;border-radius:4px;cursor:pointer;position:relative}
-.progress-fill{height:100%;background:#1DB954;border-radius:4px;width:35%;transition:width .1s}
-.progress-track:hover .progress-fill{background:#1DB954}
-.player-right{display:flex;align-items:center;justify-content:flex-end;gap:12px}
-.player-right button{background:none;border:none;color:#b3b3b3;font-size:14px;cursor:pointer;transition:.2s}
-.player-right button:hover{color:#fff}
-.vol-bar{width:80px;height:4px;background:#4d4d4d;border-radius:4px;position:relative;cursor:pointer}
+.card:hover .card-play{opacity:1;transform:translateY(-8px)}
+.card-img{width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.card-img.round{border-radius:50%}
+.card-title{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.card-desc{font-size:13px;color:#b3b3b3;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-play{position:absolute;right:16px;top:50%;transform:translateY(0);width:48px;height:48px;border-radius:50%;background:#1DB954;border:none;color:#000;font-size:22px;cursor:pointer;opacity:0;transition:.3s;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px rgba(0,0,0,.4)}
+/* Player Bar */
+.player{grid-column:1/-1;background:#181818;border-top:1px solid #282828;display:grid;grid-template-columns:300px 1fr 300px;align-items:center;padding:0 16px}
+.p-left{display:flex;align-items:center;gap:14px}
+.now-img{width:56px;height:56px;border-radius:4px;object-fit:cover;transition:transform .5s}
+.now-img.spin{animation:spin 3s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.now-info{min-width:0;flex:1}
+.now-song{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
+.now-artist{font-size:11px;color:#b3b3b3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
+.p-left button{background:none;border:none;color:#b3b3b3;font-size:16px;cursor:pointer;transition:.2s;flex-shrink:0}.p-left button:hover,.p-left button.liked{color:#1DB954}
+.p-center{display:flex;flex-direction:column;align-items:center;gap:4px}
+.p-controls{display:flex;align-items:center;gap:20px}
+.p-controls button{background:none;border:none;color:#b3b3b3;font-size:16px;cursor:pointer;transition:.2s}.p-controls button:hover{color:#fff}
+.p-controls button.active{color:#1DB954}
+.play-btn{width:32px!important;height:32px;border-radius:50%;background:#fff;color:#000!important;font-size:14px!important;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:.1s}.play-btn:hover{transform:scale(1.06)}
+.progress{display:flex;align-items:center;gap:8px;width:100%;max-width:620px}
+.time{font-size:11px;color:#b3b3b3;min-width:36px;text-align:center;font-variant-numeric:tabular-nums}
+.bar-track{flex:1;height:4px;background:#4d4d4d;border-radius:4px;cursor:pointer;position:relative;overflow:hidden}
+.bar-fill{height:100%;background:#fff;border-radius:4px;transition:width .1s}
+.bar-track:hover .bar-fill{background:#1DB954}
+.p-right{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.p-right button{background:none;border:none;color:#b3b3b3;font-size:14px;cursor:pointer;transition:.2s}.p-right button:hover{color:#fff}.p-right button.active{color:#1DB954}
+.vol-track{width:90px;height:4px;background:#4d4d4d;border-radius:4px;cursor:pointer;overflow:hidden}
 .vol-fill{height:100%;width:70%;background:#fff;border-radius:4px}
-@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{display:none}.player{grid-template-columns:1fr;text-align:center}.player-left,.player-right{display:none}}
+.vol-track:hover .vol-fill{background:#1DB954}
+@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{display:none}.player{grid-template-columns:1fr}.p-left{display:flex;gap:8px}.p-right{display:none}.card-scroll{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.main-pad{padding:16px 16px 100px}}
 </style>
 </head>
 <body>
-<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
 <div class="app">
   <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="logo"><i class="fa-brands fa-spotify"></i><span>Spotify</span></div>
-      <a class="nav-item active"><i class="fa-solid fa-house"></i> Home</a>
-      <a class="nav-item"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+    <div class="sb-box">
+      <div class="logo"><svg viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg><span>Spotify</span></div>
+      <div class="nav-link active"><i class="fa-solid fa-house"></i>Home</div>
+      <div class="nav-link"><i class="fa-solid fa-magnifying-glass"></i>Search</div>
     </div>
-    <div class="sidebar-section">
-      <div class="library-header"><h3><i class="fa-solid fa-lines-staggered"></i> Your Library</h3><button><i class="fa-solid fa-plus"></i></button></div>
+    <div class="sb-box" style="flex:1;overflow-y:auto">
+      <div class="lib-header"><span><i class="fa-solid fa-lines-staggered"></i> Your Library</span><button><i class="fa-solid fa-plus"></i></button></div>
+      <div class="lib-chips"><button class="lib-chip">Playlists</button><button class="lib-chip">Artists</button><button class="lib-chip">Albums</button></div>
       <div id="playlists"></div>
     </div>
   </aside>
-  <main class="main-content">
-    <h1 class="greeting" id="greeting">Good Evening</h1>
-    <div class="quick-picks" id="quickPicks"></div>
-    <div class="card-row"><h2>Made for You</h2><div class="cards" id="madeForYou"></div></div>
-    <div class="card-row"><h2>Recently Played</h2><div class="cards" id="recentlyPlayed"></div></div>
-    <div class="card-row"><h2>Popular Artists</h2><div class="cards" id="popularArtists"></div></div>
+  <main class="main" id="mainContent">
+    <div class="main-pad">
+      <h1 class="greeting" id="greeting"></h1>
+      <div class="quick-grid" id="quickGrid"></div>
+      <div class="section"><div class="section-head"><h2>Made For You</h2><a href="#">Show all</a></div><div class="card-scroll" id="madeForYou"></div></div>
+      <div class="section"><div class="section-head"><h2>Recently Played</h2><a href="#">Show all</a></div><div class="card-scroll" id="recentlyPlayed"></div></div>
+      <div class="section"><div class="section-head"><h2>Popular Artists</h2><a href="#">Show all</a></div><div class="card-scroll" id="artists"></div></div>
+      <div class="section"><div class="section-head"><h2>Today's Biggest Hits</h2><a href="#">Show all</a></div><div class="card-scroll" id="hits"></div></div>
+    </div>
   </main>
   <footer class="player">
-    <div class="player-left">
-      <img class="now-playing-img" src="https://picsum.photos/seed/song1/56/56" alt="Now Playing" id="nowPlayingImg">
-      <div class="now-playing-info"><div class="song-name" id="songName">Blinding Lights</div><div class="artist-name" id="artistName">The Weeknd</div></div>
-      <button class="like-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    <div class="p-left">
+      <img class="now-img" id="nowImg" src="https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647" alt="">
+      <div class="now-info"><div class="now-song" id="nowSong">Blinding Lights</div><div class="now-artist" id="nowArtist">The Weeknd</div></div>
+      <button id="likeBtn" onclick="this.classList.toggle('liked');this.querySelector('i').className=this.classList.contains('liked')?'fa-solid fa-heart':'fa-regular fa-heart'"><i class="fa-regular fa-heart"></i></button>
     </div>
-    <div class="player-center">
-      <div class="player-controls">
-        <button><i class="fa-solid fa-shuffle"></i></button>
-        <button><i class="fa-solid fa-backward-step"></i></button>
-        <button class="play-pause" id="playPause" onclick="togglePlay()"><i class="fa-solid fa-play"></i></button>
-        <button><i class="fa-solid fa-forward-step"></i></button>
-        <button><i class="fa-solid fa-repeat"></i></button>
+    <div class="p-center">
+      <div class="p-controls">
+        <button id="shuffleBtn" onclick="this.classList.toggle('active')"><i class="fa-solid fa-shuffle"></i></button>
+        <button onclick="prevSong()"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="play-btn" id="playBtn" onclick="togglePlay()"><i class="fa-solid fa-play" id="playIcon"></i></button>
+        <button onclick="nextSong()"><i class="fa-solid fa-forward-step"></i></button>
+        <button id="repeatBtn" onclick="this.classList.toggle('active')"><i class="fa-solid fa-repeat"></i></button>
       </div>
-      <div class="progress-bar"><span class="time">1:23</span><div class="progress-track" onclick="seekProgress(event)"><div class="progress-fill" id="progressFill"></div></div><span class="time">3:20</span></div>
+      <div class="progress"><span class="time" id="curTime">0:00</span><div class="bar-track" id="progressTrack"><div class="bar-fill" id="progressFill" style="width:0%"></div></div><span class="time" id="totTime">3:20</span></div>
     </div>
-    <div class="player-right">
-      <button><i class="fa-solid fa-microphone"></i></button>
-      <button><i class="fa-solid fa-list"></i></button>
-      <button><i class="fa-solid fa-volume-high"></i></button>
-      <div class="vol-bar"><div class="vol-fill"></div></div>
+    <div class="p-right">
+      <button onclick="this.classList.toggle('active')"><i class="fa-solid fa-microphone-lines"></i></button>
+      <button onclick="this.classList.toggle('active')"><i class="fa-solid fa-bars-staggered"></i></button>
+      <button><i class="fa-solid fa-desktop"></i></button>
+      <button id="volBtn"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="vol-track" id="volTrack"><div class="vol-fill" id="volFill"></div></div>
     </div>
   </footer>
 </div>
+<audio id="audio" crossorigin="anonymous"></audio>
 <script>
-const h=new Date().getHours();document.getElementById("greeting").textContent=h<12?"Good Morning":h<18?"Good Afternoon":"Good Evening";
-const playlists=[{name:"Liked Songs",type:"Playlist · 234 songs",img:"https://picsum.photos/seed/pl1/48/48"},{name:"Chill Vibes",type:"Playlist · 45 songs",img:"https://picsum.photos/seed/pl2/48/48"},{name:"Workout Mix",type:"Playlist · 78 songs",img:"https://picsum.photos/seed/pl3/48/48"},{name:"Bollywood Hits",type:"Playlist · 120 songs",img:"https://picsum.photos/seed/pl4/48/48"},{name:"Coding Flow",type:"Playlist · 56 songs",img:"https://picsum.photos/seed/pl5/48/48"},{name:"Lo-fi Study",type:"Playlist · 89 songs",img:"https://picsum.photos/seed/pl6/48/48"}];
-document.getElementById("playlists").innerHTML=playlists.map(p=>`<div class="playlist-item"><img class="playlist-img" src="${p.img}" alt="${p.name}"><div><div class="playlist-name">${p.name}</div><div class="playlist-type">${p.type}</div></div></div>`).join("");
-const quicks=["Liked Songs","Chill Vibes","Bollywood Hits","Coding Flow","Lo-fi Study","Workout Mix"];
-document.getElementById("quickPicks").innerHTML=quicks.map((q,i)=>`<div class="quick-card"><img src="https://picsum.photos/seed/qp${i}/56/56" alt="${q}"><span>${q}</span></div>`).join("");
-const madeFor=[{title:"Daily Mix 1",desc:"Arijit Singh, Pritam, A.R. Rahman",img:"https://picsum.photos/seed/m1/200/200"},{title:"Discover Weekly",desc:"Your weekly mixtape of fresh music",img:"https://picsum.photos/seed/m2/200/200"},{title:"Release Radar",desc:"Catch all the latest from artists you follow",img:"https://picsum.photos/seed/m3/200/200"},{title:"Chill Mix",desc:"The Weeknd, Dua Lipa, Post Malone",img:"https://picsum.photos/seed/m4/200/200"},{title:"Mood Booster",desc:"Get happy with these feel-good hits!",img:"https://picsum.photos/seed/m5/200/200"}];
-document.getElementById("madeForYou").innerHTML=madeFor.map(c=>`<div class="card"><img class="card-img" src="${c.img}" alt="${c.title}"><button class="play-btn"><i class="fa-solid fa-play"></i></button><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>`).join("");
-const recent=[{title:"Blinding Lights",desc:"The Weeknd",img:"https://picsum.photos/seed/r1/200/200"},{title:"Levitating",desc:"Dua Lipa",img:"https://picsum.photos/seed/r2/200/200"},{title:"Shape of You",desc:"Ed Sheeran",img:"https://picsum.photos/seed/r3/200/200"},{title:"Stay",desc:"Justin Bieber, Kid LAROI",img:"https://picsum.photos/seed/r4/200/200"},{title:"Heat Waves",desc:"Glass Animals",img:"https://picsum.photos/seed/r5/200/200"}];
-document.getElementById("recentlyPlayed").innerHTML=recent.map(c=>`<div class="card"><img class="card-img" src="${c.img}" alt="${c.title}"><button class="play-btn"><i class="fa-solid fa-play"></i></button><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>`).join("");
-const artists=[{title:"Arijit Singh",desc:"Artist",img:"https://picsum.photos/seed/a1/200/200"},{title:"The Weeknd",desc:"Artist",img:"https://picsum.photos/seed/a2/200/200"},{title:"Dua Lipa",desc:"Artist",img:"https://picsum.photos/seed/a3/200/200"},{title:"A.R. Rahman",desc:"Artist",img:"https://picsum.photos/seed/a4/200/200"},{title:"Ed Sheeran",desc:"Artist",img:"https://picsum.photos/seed/a5/200/200"}];
-document.getElementById("popularArtists").innerHTML=artists.map(c=>`<div class="card"><img class="card-img" src="${c.img}" alt="${c.title}" style="border-radius:50%"><button class="play-btn"><i class="fa-solid fa-play"></i></button><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>`).join("");
-let playing=false;
-function togglePlay(){playing=!playing;document.getElementById("playPause").innerHTML=playing?'<i class="fa-solid fa-pause"></i>':'<i class="fa-solid fa-play"></i>';if(playing){animateProgress()}}
-let progress=35;function animateProgress(){if(!playing)return;progress+=0.5;if(progress>100)progress=0;document.getElementById("progressFill").style.width=progress+"%";requestAnimationFrame(()=>setTimeout(animateProgress,200))}
-function seekProgress(e){const rect=e.currentTarget.getBoundingClientRect();progress=(e.clientX-rect.left)/rect.width*100;document.getElementById("progressFill").style.width=progress+"%"}
+const h=new Date().getHours();
+document.getElementById("greeting").textContent=h<12?"Good morning":h<18?"Good afternoon":"Good evening";
+
+const songs=[
+  {title:"Blinding Lights",artist:"The Weeknd",img:"https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647",duration:"3:20",color:"#4a1a2e"},
+  {title:"Levitating",artist:"Dua Lipa",img:"https://i.scdn.co/image/ab67616d00004851d4daf28d55fe4197ede848be",duration:"3:23",color:"#2a3a5e"},
+  {title:"Shape of You",artist:"Ed Sheeran",img:"https://i.scdn.co/image/ab67616d00004851ba5db46f4b838ef6027e6f96",duration:"3:53",color:"#3a2a1e"},
+  {title:"Stay",artist:"The Kid LAROI, Justin Bieber",img:"https://i.scdn.co/image/ab67616d000048512a00e47c5b502f5ac2c2e4b5",duration:"2:21",color:"#5a2a4e"},
+  {title:"Heat Waves",artist:"Glass Animals",img:"https://i.scdn.co/image/ab67616d00004851712701c5e263efc8726b1464",duration:"3:58",color:"#1a4a3e"},
+  {title:"Starboy",artist:"The Weeknd, Daft Punk",img:"https://i.scdn.co/image/ab67616d00004851a048415d3f7752c0fd4b3e59",duration:"3:50",color:"#2a1a2e"},
+  {title:"Sunflower",artist:"Post Malone, Swae Lee",img:"https://i.scdn.co/image/ab67616d00004851e2e352d89826aef6dbd5ff8f",duration:"2:38",color:"#5a4a1e"},
+  {title:"Save Your Tears",artist:"The Weeknd",img:"https://i.scdn.co/image/ab67616d00004851e787cffec20aa2a396a61647",duration:"3:35",color:"#3a1a4e"},
+];
+let currentSong=0,isPlaying=false,progressInterval;
+
+function formatTime(s){return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0")}
+function parseDur(d){const p=d.split(":");return+p[0]*60+(+p[1])}
+
+function updateNowPlaying(){
+  const s=songs[currentSong];
+  document.getElementById("nowImg").src=s.img;
+  document.getElementById("nowSong").textContent=s.title;
+  document.getElementById("nowArtist").textContent=s.artist;
+  document.getElementById("totTime").textContent=s.duration;
+  document.getElementById("mainContent").style.setProperty("--gradient-color",s.color);
+}
+
+let fakeProgress=0,totalDur;
+function togglePlay(){
+  isPlaying=!isPlaying;
+  document.getElementById("playIcon").className=isPlaying?"fa-solid fa-pause":"fa-solid fa-play";
+  document.getElementById("nowImg").classList.toggle("spin",isPlaying);
+  if(isPlaying){
+    totalDur=parseDur(songs[currentSong].duration);
+    progressInterval=setInterval(()=>{
+      fakeProgress+=0.5;
+      if(fakeProgress>=totalDur){fakeProgress=0;nextSong();return}
+      document.getElementById("progressFill").style.width=(fakeProgress/totalDur*100)+"%";
+      document.getElementById("curTime").textContent=formatTime(fakeProgress);
+    },500);
+  }else{clearInterval(progressInterval)}
+}
+function nextSong(){clearInterval(progressInterval);fakeProgress=0;currentSong=(currentSong+1)%songs.length;updateNowPlaying();if(isPlaying){isPlaying=false;togglePlay()}}
+function prevSong(){clearInterval(progressInterval);fakeProgress=0;currentSong=(currentSong-1+songs.length)%songs.length;updateNowPlaying();if(isPlaying){isPlaying=false;togglePlay()}}
+
+document.getElementById("progressTrack").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const pct=(e.clientX-r.left)/r.width;totalDur=parseDur(songs[currentSong].duration);fakeProgress=pct*totalDur;document.getElementById("progressFill").style.width=(pct*100)+"%";document.getElementById("curTime").textContent=formatTime(fakeProgress)});
+document.getElementById("volTrack").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const pct=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));document.getElementById("volFill").style.width=(pct*100)+"%"});
+
+// Playlists
+const pls=[{name:"Liked Songs",type:"Playlist",img:"https://misc.scdn.co/liked-songs/liked-songs-640.png"},{name:"Daily Mix 1",type:"Playlist · Spotify",img:"https://picsum.photos/seed/sp1/100"},{name:"Chill Vibes",type:"Playlist · 45 songs",img:"https://picsum.photos/seed/sp2/100"},{name:"Workout Beats",type:"Playlist · 78 songs",img:"https://picsum.photos/seed/sp3/100"},{name:"Bollywood Hits",type:"Playlist · 120 songs",img:"https://picsum.photos/seed/sp4/100"},{name:"Coding Flow",type:"Playlist · 56 songs",img:"https://picsum.photos/seed/sp5/100"},{name:"Lo-fi Study",type:"Playlist · 89 songs",img:"https://picsum.photos/seed/sp6/100"},{name:"Arijit Singh",type:"Artist",img:"https://picsum.photos/seed/art1/100",round:true}];
+document.getElementById("playlists").innerHTML=pls.map((p,i)=>`<div class="pl-item${i===0?" active":""}" onclick="document.querySelectorAll('.pl-item').forEach(x=>x.classList.remove('active'));this.classList.add('active')"><img class="pl-img${p.round?" round":""}" src="${p.img}" alt="${p.name}"><div><div class="pl-name">${p.name}</div><div class="pl-type">${p.type}</div></div></div>`).join("");
+
+// Quick picks
+const quicks=["Liked Songs","Chill Vibes","Bollywood Hits","Coding Flow","Daily Mix 1","Lo-fi Study"];
+document.getElementById("quickGrid").innerHTML=quicks.map((q,i)=>`<div class="quick" onclick="currentSong=${i%songs.length};updateNowPlaying();if(!isPlaying)togglePlay()"><img src="https://picsum.photos/seed/qk${i}/60" alt="${q}"><span>${q}</span><button class="quick-play"><i class="fa-solid fa-play"></i></button></div>`).join("");
+
+// Cards
+const made=[{t:"Daily Mix 1",d:"Arijit Singh, Pritam, A.R. Rahman",img:"https://picsum.photos/seed/mf1/200"},{t:"Discover Weekly",d:"Your weekly mixtape of fresh music. Enjoy new discoveries and deep cuts.",img:"https://picsum.photos/seed/mf2/200"},{t:"Release Radar",d:"Catch all the latest music from artists you follow",img:"https://picsum.photos/seed/mf3/200"},{t:"Chill Mix",d:"The Weeknd, Dua Lipa, Post Malone and more",img:"https://picsum.photos/seed/mf4/200"},{t:"Mood Booster",d:"Get happy with these upbeat feel-good hits!",img:"https://picsum.photos/seed/mf5/200"}];
+document.getElementById("madeForYou").innerHTML=made.map((c,i)=>`<div class="card" onclick="currentSong=${i%songs.length};updateNowPlaying();if(!isPlaying)togglePlay()"><img class="card-img" src="${c.img}" alt="${c.t}"><button class="card-play"><i class="fa-solid fa-play"></i></button><div class="card-title">${c.t}</div><div class="card-desc">${c.d}</div></div>`).join("");
+
+const recent=songs.slice(0,5).map((s,i)=>`<div class="card" onclick="currentSong=${i};updateNowPlaying();if(!isPlaying)togglePlay()"><img class="card-img" src="${s.img}" alt="${s.title}"><button class="card-play"><i class="fa-solid fa-play"></i></button><div class="card-title">${s.title}</div><div class="card-desc">${s.artist}</div></div>`);
+document.getElementById("recentlyPlayed").innerHTML=recent.join("");
+
+const artistData=[{n:"Arijit Singh",img:"https://picsum.photos/seed/ar1/200"},{n:"The Weeknd",img:"https://picsum.photos/seed/ar2/200"},{n:"Dua Lipa",img:"https://picsum.photos/seed/ar3/200"},{n:"Ed Sheeran",img:"https://picsum.photos/seed/ar4/200"},{n:"A.R. Rahman",img:"https://picsum.photos/seed/ar5/200"}];
+document.getElementById("artists").innerHTML=artistData.map(a=>`<div class="card"><img class="card-img round" src="${a.img}" alt="${a.n}"><button class="card-play"><i class="fa-solid fa-play"></i></button><div class="card-title">${a.n}</div><div class="card-desc">Artist</div></div>`).join("");
+
+const hitsData=[{t:"Today's Top Hits",d:"Dua Lipa is on top of the Hottest 50!",img:"https://picsum.photos/seed/h1/200"},{t:"RapCaviar",d:"New music from Drake, Travis Scott and more",img:"https://picsum.photos/seed/h2/200"},{t:"All Out 2020s",d:"The biggest songs of the 2020s so far",img:"https://picsum.photos/seed/h3/200"},{t:"Rock Classics",d:"Rock legends & icons from the 60s to today",img:"https://picsum.photos/seed/h4/200"},{t:"Peaceful Piano",d:"Relax and indulge with beautiful piano pieces",img:"https://picsum.photos/seed/h5/200"}];
+document.getElementById("hits").innerHTML=hitsData.map((c,i)=>`<div class="card" onclick="currentSong=${(i+3)%songs.length};updateNowPlaying();if(!isPlaying)togglePlay()"><img class="card-img" src="${c.img}" alt="${c.t}"><button class="card-play"><i class="fa-solid fa-play"></i></button><div class="card-title">${c.t}</div><div class="card-desc">${c.d}</div></div>`).join("");
+
+updateNowPlaying();
 </script>
 </body>
 </html>

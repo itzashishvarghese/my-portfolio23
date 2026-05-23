@@ -3,109 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather App | Ashish Varghese</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>WeatherNow | Ashish Varghese</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-:root{--bg:#0a0e1a;--card:#131833;--accent:#00d4ff;--text:#e4e6eb;--glass:rgba(19,24,51,0.6)}
-body{background:var(--bg);color:var(--text);min-height:100vh}
-.back-link{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;color:var(--accent);font-size:14px;text-decoration:none;transition:.3s}.back-link:hover{opacity:.7}
-.app{max-width:900px;margin:0 auto;padding:0 20px 40px}
-.search-wrap{display:flex;gap:10px;margin-bottom:30px}
-.search-wrap input{flex:1;padding:14px 20px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,.15);border-radius:14px;color:var(--text);font-size:16px;outline:none;transition:.3s;font-family:'Poppins',sans-serif}
-.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 20px rgba(0,212,255,.15)}
-.search-wrap input::placeholder{color:rgba(255,255,255,.3)}
-.search-btn{padding:14px 24px;background:linear-gradient(135deg,#00d4ff,#0098b3);border:none;border-radius:14px;color:var(--bg);font-size:18px;cursor:pointer;transition:.3s}
-.search-btn:hover{box-shadow:0 4px 20px rgba(0,212,255,.4)}
-.main-weather{background:var(--glass);backdrop-filter:blur(12px);border:1px solid rgba(0,212,255,.1);border-radius:24px;padding:35px;margin-bottom:25px;text-align:center;position:relative;overflow:hidden}
-.main-weather::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,212,255,.1),transparent);border-radius:50%}
-.city-name{font-size:28px;font-weight:700}.country{font-size:14px;opacity:.5}
-.weather-icon{font-size:80px;margin:15px 0}
-.temperature{font-size:64px;font-weight:700;background:linear-gradient(135deg,#00d4ff,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.description{font-size:18px;opacity:.7;margin-bottom:20px;text-transform:capitalize}
-.details{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.detail-box{background:rgba(255,255,255,.03);border-radius:14px;padding:15px;text-align:center}
-.detail-box i{color:var(--accent);font-size:20px;margin-bottom:6px}
-.detail-box .val{font-size:20px;font-weight:700}
-.detail-box .lbl{font-size:11px;opacity:.4}
-.section-title{font-size:18px;font-weight:600;margin-bottom:15px}
-.forecast{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:25px}
-.forecast-card{background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,.08);border-radius:16px;padding:18px;text-align:center;transition:.3s}
-.forecast-card:hover{border-color:rgba(0,212,255,.25);transform:translateY(-3px)}
-.forecast-card .day{font-size:13px;font-weight:600;margin-bottom:6px}
-.forecast-card .icon{font-size:32px;margin:8px 0}
-.forecast-card .temps{font-size:14px}
-.forecast-card .temps .high{font-weight:700}
-.forecast-card .temps .low{opacity:.4;margin-left:4px}
-.hourly{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;margin-bottom:25px}
-.hourly::-webkit-scrollbar{height:4px}.hourly::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
-.hour-card{min-width:80px;background:var(--glass);border:1px solid rgba(0,212,255,.08);border-radius:14px;padding:14px 10px;text-align:center;flex-shrink:0;transition:.3s}
-.hour-card:hover{border-color:rgba(0,212,255,.25)}
-.hour-card .time{font-size:12px;opacity:.5}
-.hour-card .hicon{font-size:24px;margin:6px 0}
-.hour-card .htemp{font-size:16px;font-weight:600}
-.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.extra-card{background:var(--glass);border:1px solid rgba(0,212,255,.08);border-radius:14px;padding:18px;text-align:center;transition:.3s}
-.extra-card:hover{border-color:rgba(0,212,255,.2)}
-.extra-card i{color:var(--accent);font-size:24px;margin-bottom:8px}
-.extra-card .eval{font-size:22px;font-weight:700}
-.extra-card .elbl{font-size:12px;opacity:.4}
-@media(max-width:768px){.details{grid-template-columns:repeat(2,1fr)}.forecast{grid-template-columns:repeat(3,1fr)}.extras{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.forecast{grid-template-columns:repeat(2,1fr)}.temperature{font-size:48px}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{min-height:100vh;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);color:#fff;display:flex;flex-direction:column;align-items:center;padding:20px}
+.back-link{position:fixed;top:16px;left:16px;z-index:100;color:#38bdf8;font-size:13px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:.3s;background:rgba(15,23,42,.7);padding:8px 16px;border-radius:20px;backdrop-filter:blur(10px)}.back-link:hover{background:rgba(56,189,248,.15)}
+/* Header */
+.app-header{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:900px;margin-bottom:24px;padding:0 10px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#38bdf8,#818cf8);display:flex;align-items:center;justify-content:center;font-size:22px}
+.logo-text{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.logo-text span{background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.search-box{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:0 16px;width:320px;transition:.3s}
+.search-box:focus-within{border-color:#38bdf8;background:rgba(56,189,248,.05);box-shadow:0 0 20px rgba(56,189,248,.1)}
+.search-box i{color:#64748b;font-size:14px}
+.search-box input{background:none;border:none;outline:none;color:#fff;font-size:14px;padding:12px;flex:1;font-family:'Inter',sans-serif}
+.search-box input::placeholder{color:#64748b}
+/* Current Weather */
+.current{width:100%;max-width:900px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:40px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.current::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(56,189,248,.08),transparent 70%);pointer-events:none}
+.current-left{position:relative;z-index:1}
+.location{display:flex;align-items:center;gap:8px;font-size:14px;color:#94a3b8;margin-bottom:8px}
+.location i{font-size:12px}
+.temp{font-size:84px;font-weight:800;letter-spacing:-4px;line-height:1;margin-bottom:8px}
+.temp sup{font-size:32px;font-weight:400;color:#94a3b8;letter-spacing:0}
+.condition{font-size:20px;font-weight:600;margin-bottom:4px}
+.feels{font-size:14px;color:#94a3b8}
+.current-right{text-align:center;position:relative;z-index:1}
+.weather-icon{font-size:100px;margin-bottom:8px;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hi-lo{font-size:15px;color:#94a3b8}
+.hi-lo span{color:#fff;font-weight:600}
+/* Details Grid */
+.details-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;max-width:900px;margin-bottom:20px}
+.detail-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;text-align:center;transition:.3s;backdrop-filter:blur(5px)}
+.detail-card:hover{border-color:rgba(56,189,248,.2);background:rgba(56,189,248,.04);transform:translateY(-4px)}
+.detail-card i{font-size:22px;color:#38bdf8;margin-bottom:8px}
+.detail-card .val{font-size:22px;font-weight:700;margin-bottom:2px}
+.detail-card .label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+/* Hourly */
+.section-title{width:100%;max-width:900px;font-size:18px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-title i{color:#38bdf8}
+.hourly-scroll{display:flex;gap:10px;width:100%;max-width:900px;overflow-x:auto;padding-bottom:12px;margin-bottom:20px}
+.hourly-scroll::-webkit-scrollbar{height:4px}.hourly-scroll::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+.hour-card{min-width:80px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px 12px;text-align:center;flex-shrink:0;transition:.3s}
+.hour-card:hover{border-color:rgba(56,189,248,.2);background:rgba(56,189,248,.05)}
+.hour-card.now{background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(129,140,248,.15));border-color:rgba(56,189,248,.3)}
+.hour-time{font-size:12px;color:#94a3b8;margin-bottom:8px;font-weight:500}
+.hour-icon{font-size:24px;margin-bottom:8px}
+.hour-temp{font-size:16px;font-weight:700}
+/* 5-Day Forecast */
+.forecast{width:100%;max-width:900px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:20px;overflow:hidden;backdrop-filter:blur(5px)}
+.forecast-row{display:flex;align-items:center;padding:14px 24px;border-bottom:1px solid rgba(255,255,255,.04);transition:.2s}
+.forecast-row:last-child{border:none}
+.forecast-row:hover{background:rgba(255,255,255,.03)}
+.f-day{width:100px;font-size:14px;font-weight:600}
+.f-icon{width:40px;font-size:24px;text-align:center}
+.f-condition{flex:1;font-size:13px;color:#94a3b8;padding:0 16px}
+.f-bar{width:120px;height:6px;border-radius:3px;background:#1e293b;overflow:hidden;margin:0 16px}
+.f-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#38bdf8,#818cf8)}
+.f-temps{font-size:14px;min-width:80px;text-align:right}
+.f-temps .hi{font-weight:700}
+.f-temps .lo{color:#64748b}
+/* Cities quick */
+.cities-bar{display:flex;gap:8px;width:100%;max-width:900px;overflow-x:auto;margin-bottom:20px;padding-bottom:8px}
+.cities-bar::-webkit-scrollbar{display:none}
+.city-chip{padding:8px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#94a3b8;font-size:13px;cursor:pointer;white-space:nowrap;transition:.2s;font-family:'Inter',sans-serif;font-weight:500}
+.city-chip:hover{border-color:#38bdf8;color:#fff}
+.city-chip.active{background:linear-gradient(135deg,#38bdf8,#818cf8);color:#fff;border-color:transparent;font-weight:600}
+@media(max-width:768px){.current{flex-direction:column;text-align:center;padding:28px 20px}.current-right{margin-top:16px}.details-grid{grid-template-columns:repeat(2,1fr)}.search-box{width:200px}.temp{font-size:64px}}
+@media(max-width:500px){.app-header{flex-direction:column;gap:12px}.search-box{width:100%}.details-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
-<div class="app">
-  <div class="search-wrap"><input type="text" id="cityInput" placeholder="Search city... (e.g. London, Tokyo, Mumbai)"><button class="search-btn" id="searchBtn"><i class="fa-solid fa-search"></i></button></div>
-  <div id="weatherContent"></div>
+<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+<div class="app-header">
+  <div class="logo"><div class="logo-icon">⛅</div><div class="logo-text">Weather<span>Now</span></div></div>
+  <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="searchInput" placeholder="Search city..."></div>
 </div>
+<div class="cities-bar" id="citiesBar"></div>
+<div class="current" id="currentWeather"></div>
+<div class="details-grid" id="detailsGrid"></div>
+<div class="section-title"><i class="fa-solid fa-clock"></i> Hourly Forecast</div>
+<div class="hourly-scroll" id="hourlyScroll"></div>
+<div class="section-title"><i class="fa-solid fa-calendar-days"></i> 5-Day Forecast</div>
+<div class="forecast" id="forecast"></div>
 <script>
-const cities={
-  "new delhi":{temp:38,feels:42,desc:"haze",icon:"🌫️",humidity:28,wind:12,pressure:1005,uv:9,visibility:"4 km",sunrise:"05:24",sunset:"19:12",hourly:[36,37,38,38,37,35,33,31],forecast:[{day:"Mon",icon:"☀️",hi:39,lo:27},{day:"Tue",icon:"🌤️",hi:37,lo:26},{day:"Wed",icon:"⛈️",hi:34,lo:24},{day:"Thu",icon:"🌧️",hi:32,lo:23},{day:"Fri",icon:"☀️",hi:36,lo:25}]},
-  "mumbai":{temp:33,feels:38,desc:"partly cloudy",icon:"🌤️",humidity:72,wind:18,pressure:1008,uv:8,visibility:"6 km",sunrise:"06:01",sunset:"19:16",hourly:[31,32,33,33,32,31,30,29],forecast:[{day:"Mon",icon:"🌧️",hi:33,lo:26},{day:"Tue",icon:"⛈️",hi:31,lo:25},{day:"Wed",icon:"🌧️",hi:30,lo:25},{day:"Thu",icon:"🌤️",hi:32,lo:26},{day:"Fri",icon:"☀️",hi:34,lo:27}]},
-  "london":{temp:16,feels:14,desc:"overcast clouds",icon:"☁️",humidity:68,wind:22,pressure:1015,uv:3,visibility:"10 km",sunrise:"05:02",sunset:"21:05",hourly:[15,15,16,16,15,14,13,12],forecast:[{day:"Mon",icon:"🌧️",hi:15,lo:9},{day:"Tue",icon:"☁️",hi:16,lo:10},{day:"Wed",icon:"🌤️",hi:18,lo:11},{day:"Thu",icon:"☀️",hi:20,lo:12},{day:"Fri",icon:"🌧️",hi:14,lo:8}]},
-  "new york":{temp:24,feels:25,desc:"clear sky",icon:"☀️",humidity:45,wind:14,pressure:1018,uv:7,visibility:"16 km",sunrise:"05:29",sunset:"20:18",hourly:[22,23,24,25,24,23,21,20],forecast:[{day:"Mon",icon:"☀️",hi:26,lo:17},{day:"Tue",icon:"🌤️",hi:24,lo:16},{day:"Wed",icon:"⛈️",hi:21,lo:14},{day:"Thu",icon:"🌧️",hi:19,lo:13},{day:"Fri",icon:"☀️",hi:25,lo:16}]},
-  "tokyo":{temp:22,feels:23,desc:"light rain",icon:"🌧️",humidity:78,wind:10,pressure:1012,uv:4,visibility:"8 km",sunrise:"04:30",sunset:"18:50",hourly:[21,21,22,22,21,20,19,19],forecast:[{day:"Mon",icon:"🌧️",hi:22,lo:16},{day:"Tue",icon:"🌧️",hi:20,lo:15},{day:"Wed",icon:"☁️",hi:23,lo:17},{day:"Thu",icon:"🌤️",hi:25,lo:18},{day:"Fri",icon:"☀️",hi:26,lo:19}]},
-  "sydney":{temp:18,feels:17,desc:"sunny",icon:"☀️",humidity:55,wind:20,pressure:1020,uv:5,visibility:"14 km",sunrise:"06:45",sunset:"17:05",hourly:[17,17,18,18,17,16,15,14],forecast:[{day:"Mon",icon:"☀️",hi:19,lo:12},{day:"Tue",icon:"🌤️",hi:18,lo:11},{day:"Wed",icon:"☁️",hi:17,lo:10},{day:"Thu",icon:"🌧️",hi:15,lo:9},{day:"Fri",icon:"☀️",hi:20,lo:13}]},
-  "paris":{temp:19,feels:18,desc:"scattered clouds",icon:"⛅",humidity:62,wind:16,pressure:1016,uv:5,visibility:"12 km",sunrise:"05:55",sunset:"21:35",hourly:[17,18,19,19,18,17,16,15],forecast:[{day:"Mon",icon:"🌤️",hi:20,lo:12},{day:"Tue",icon:"☀️",hi:22,lo:13},{day:"Wed",icon:"☁️",hi:18,lo:11},{day:"Thu",icon:"🌧️",hi:16,lo:10},{day:"Fri",icon:"⛅",hi:19,lo:12}]},
-  "dubai":{temp:42,feels:46,desc:"clear sky",icon:"☀️",humidity:18,wind:24,pressure:1002,uv:11,visibility:"10 km",sunrise:"05:28",sunset:"19:05",hourly:[40,41,42,43,42,41,39,38],forecast:[{day:"Mon",icon:"☀️",hi:43,lo:32},{day:"Tue",icon:"☀️",hi:44,lo:33},{day:"Wed",icon:"🌤️",hi:41,lo:31},{day:"Thu",icon:"☀️",hi:42,lo:32},{day:"Fri",icon:"☀️",hi:45,lo:34}]}
+const weatherData={
+  "New Delhi":{temp:42,feels:45,condition:"Haze",icon:"🌫️",hi:44,lo:30,humidity:22,wind:14,uv:9,visibility:3,pressure:1005,sunrise:"5:25",sunset:"7:12",hourly:[{t:"Now",i:"🌫️",temp:42},{t:"2PM",i:"☀️",temp:44},{t:"3PM",i:"☀️",temp:43},{t:"4PM",i:"🌤️",temp:41},{t:"5PM",i:"🌤️",temp:38},{t:"6PM",i:"🌅",temp:35},{t:"7PM",i:"🌙",temp:33},{t:"8PM",i:"🌙",temp:31},{t:"9PM",i:"🌙",temp:30},{t:"10PM",i:"🌙",temp:29}],forecast:[{day:"Tomorrow",i:"☀️",c:"Sunny",hi:43,lo:29,pct:85},{day:"Sunday",i:"🌤️",c:"Partly Cloudy",hi:41,lo:28,pct:75},{day:"Monday",i:"⛈️",c:"Thunderstorm",hi:36,lo:26,pct:55},{day:"Tuesday",i:"🌧️",c:"Light Rain",hi:34,lo:25,pct:50},{day:"Wednesday",i:"☀️",c:"Sunny",hi:40,lo:27,pct:80}]},
+  "Mumbai":{temp:34,feels:38,condition:"Humid",icon:"🌤️",hi:35,lo:28,humidity:72,wind:18,uv:7,visibility:5,pressure:1008,sunrise:"6:02",sunset:"7:18",hourly:[{t:"Now",i:"🌤️",temp:34},{t:"2PM",i:"☀️",temp:35},{t:"3PM",i:"🌤️",temp:34},{t:"4PM",i:"🌦️",temp:32},{t:"5PM",i:"🌧️",temp:30},{t:"6PM",i:"🌅",temp:29},{t:"7PM",i:"🌙",temp:28},{t:"8PM",i:"🌙",temp:28},{t:"9PM",i:"🌙",temp:28},{t:"10PM",i:"🌙",temp:27}],forecast:[{day:"Tomorrow",i:"🌧️",c:"Showers",hi:33,lo:27,pct:60},{day:"Sunday",i:"⛈️",c:"Heavy Rain",hi:31,lo:26,pct:45},{day:"Monday",i:"🌦️",c:"Drizzle",hi:32,lo:27,pct:55},{day:"Tuesday",i:"🌤️",c:"Partly Cloudy",hi:34,lo:28,pct:65},{day:"Wednesday",i:"☀️",c:"Sunny",hi:35,lo:28,pct:80}]},
+  "London":{temp:16,feels:14,condition:"Overcast",icon:"☁️",hi:18,lo:11,humidity:68,wind:22,uv:3,visibility:10,pressure:1018,sunrise:"5:05",sunset:"9:02",hourly:[{t:"Now",i:"☁️",temp:16},{t:"2PM",i:"🌤️",temp:18},{t:"3PM",i:"🌤️",temp:17},{t:"4PM",i:"☁️",temp:16},{t:"5PM",i:"🌧️",temp:15},{t:"6PM",i:"🌧️",temp:14},{t:"7PM",i:"🌙",temp:13},{t:"8PM",i:"🌙",temp:12},{t:"9PM",i:"🌙",temp:11},{t:"10PM",i:"🌙",temp:11}],forecast:[{day:"Tomorrow",i:"🌧️",c:"Light Rain",hi:15,lo:10,pct:35},{day:"Sunday",i:"☁️",c:"Cloudy",hi:16,lo:11,pct:40},{day:"Monday",i:"🌤️",c:"Partly Sunny",hi:19,lo:12,pct:55},{day:"Tuesday",i:"☀️",c:"Sunny",hi:21,lo:13,pct:70},{day:"Wednesday",i:"🌤️",c:"Partly Cloudy",hi:20,lo:12,pct:60}]},
+  "New York":{temp:24,feels:26,condition:"Sunny",icon:"☀️",hi:27,lo:18,humidity:45,wind:16,uv:6,visibility:16,pressure:1020,sunrise:"5:32",sunset:"8:18",hourly:[{t:"Now",i:"☀️",temp:24},{t:"2PM",i:"☀️",temp:27},{t:"3PM",i:"☀️",temp:26},{t:"4PM",i:"🌤️",temp:25},{t:"5PM",i:"🌤️",temp:23},{t:"6PM",i:"🌅",temp:21},{t:"7PM",i:"🌙",temp:20},{t:"8PM",i:"🌙",temp:19},{t:"9PM",i:"🌙",temp:18},{t:"10PM",i:"🌙",temp:18}],forecast:[{day:"Tomorrow",i:"🌤️",c:"Partly Cloudy",hi:26,lo:17,pct:65},{day:"Sunday",i:"☀️",c:"Sunny",hi:28,lo:19,pct:80},{day:"Monday",i:"⛈️",c:"Thunderstorm",hi:22,lo:16,pct:40},{day:"Tuesday",i:"🌧️",c:"Rainy",hi:20,lo:15,pct:35},{day:"Wednesday",i:"🌤️",c:"Partly Cloudy",hi:24,lo:16,pct:60}]},
+  "Tokyo":{temp:22,feels:23,condition:"Partly Cloudy",icon:"🌤️",hi:24,lo:17,humidity:58,wind:12,uv:5,visibility:12,pressure:1015,sunrise:"4:30",sunset:"6:48",hourly:[{t:"Now",i:"🌤️",temp:22},{t:"2PM",i:"☀️",temp:24},{t:"3PM",i:"🌤️",temp:23},{t:"4PM",i:"☁️",temp:22},{t:"5PM",i:"☁️",temp:20},{t:"6PM",i:"🌅",temp:19},{t:"7PM",i:"🌙",temp:18},{t:"8PM",i:"🌙",temp:17},{t:"9PM",i:"🌙",temp:17},{t:"10PM",i:"🌙",temp:17}],forecast:[{day:"Tomorrow",i:"🌧️",c:"Light Rain",hi:21,lo:16,pct:45},{day:"Sunday",i:"☁️",c:"Cloudy",hi:20,lo:15,pct:40},{day:"Monday",i:"🌤️",c:"Partly Sunny",hi:23,lo:17,pct:60},{day:"Tuesday",i:"☀️",c:"Sunny",hi:25,lo:18,pct:75},{day:"Wednesday",i:"🌤️",c:"Partly Cloudy",hi:24,lo:17,pct:65}]},
+  "Dubai":{temp:40,feels:43,condition:"Clear Sky",icon:"☀️",hi:42,lo:31,humidity:30,wind:20,uv:11,visibility:10,pressure:1007,sunrise:"5:35",sunset:"7:02",hourly:[{t:"Now",i:"☀️",temp:40},{t:"2PM",i:"☀️",temp:42},{t:"3PM",i:"☀️",temp:41},{t:"4PM",i:"☀️",temp:39},{t:"5PM",i:"🌅",temp:37},{t:"6PM",i:"🌅",temp:35},{t:"7PM",i:"🌙",temp:33},{t:"8PM",i:"🌙",temp:32},{t:"9PM",i:"🌙",temp:31},{t:"10PM",i:"🌙",temp:31}],forecast:[{day:"Tomorrow",i:"☀️",c:"Sunny",hi:43,lo:32,pct:90},{day:"Sunday",i:"☀️",c:"Clear",hi:44,lo:33,pct:95},{day:"Monday",i:"🌤️",c:"Hazy",hi:41,lo:31,pct:80},{day:"Tuesday",i:"☀️",c:"Sunny",hi:42,lo:32,pct:85},{day:"Wednesday",i:"☀️",c:"Clear",hi:43,lo:33,pct:90}]},
+  "Singapore":{temp:30,feels:34,condition:"Thunderstorms",icon:"⛈️",hi:32,lo:26,humidity:82,wind:10,uv:4,visibility:6,pressure:1010,sunrise:"6:58",sunset:"7:10",hourly:[{t:"Now",i:"⛈️",temp:30},{t:"2PM",i:"🌧️",temp:29},{t:"3PM",i:"⛈️",temp:28},{t:"4PM",i:"🌧️",temp:28},{t:"5PM",i:"🌦️",temp:27},{t:"6PM",i:"🌅",temp:27},{t:"7PM",i:"🌙",temp:26},{t:"8PM",i:"🌙",temp:26},{t:"9PM",i:"🌙",temp:26},{t:"10PM",i:"🌙",temp:26}],forecast:[{day:"Tomorrow",i:"🌧️",c:"Heavy Rain",hi:31,lo:26,pct:50},{day:"Sunday",i:"⛈️",c:"Storms",hi:30,lo:25,pct:45},{day:"Monday",i:"🌦️",c:"Light Showers",hi:31,lo:26,pct:55},{day:"Tuesday",i:"🌤️",c:"Partly Cloudy",hi:32,lo:26,pct:65},{day:"Wednesday",i:"☀️",c:"Sunny",hi:33,lo:27,pct:70}]},
+  "Sydney":{temp:18,feels:16,condition:"Windy",icon:"💨",hi:20,lo:13,humidity:55,wind:28,uv:4,visibility:15,pressure:1022,sunrise:"6:45",sunset:"5:08",hourly:[{t:"Now",i:"💨",temp:18},{t:"2PM",i:"🌤️",temp:20},{t:"3PM",i:"☁️",temp:19},{t:"4PM",i:"🌤️",temp:18},{t:"5PM",i:"🌅",temp:16},{t:"6PM",i:"🌙",temp:15},{t:"7PM",i:"🌙",temp:14},{t:"8PM",i:"🌙",temp:13},{t:"9PM",i:"🌙",temp:13},{t:"10PM",i:"🌙",temp:13}],forecast:[{day:"Tomorrow",i:"☁️",c:"Cloudy",hi:19,lo:12,pct:45},{day:"Sunday",i:"🌧️",c:"Showers",hi:17,lo:11,pct:35},{day:"Monday",i:"🌤️",c:"Partly Sunny",hi:20,lo:13,pct:55},{day:"Tuesday",i:"☀️",c:"Sunny",hi:22,lo:14,pct:70},{day:"Wednesday",i:"☀️",c:"Clear",hi:23,lo:15,pct:75}]}
 };
 
-function render(city){
-  const d=cities[city.toLowerCase()];
-  if(!d){document.getElementById("weatherContent").innerHTML='<div style="text-align:center;padding:40px;opacity:.5"><h2>City not found</h2><p>Try: New Delhi, Mumbai, London, New York, Tokyo, Sydney, Paris, Dubai</p></div>';return}
-  const name=city.split(" ").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
-  const now=new Date();
-  const hours=Array.from({length:8},(_,i)=>{const h=(now.getHours()+i)%24;return h<10?"0"+h+":00":h+":00"});
-  document.getElementById("weatherContent").innerHTML=`
-    <div class="main-weather">
-      <div class="city-name">${name}</div><div class="country">🌍 Weather Report</div>
-      <div class="weather-icon">${d.icon}</div>
-      <div class="temperature">${d.temp}°C</div>
-      <div class="description">${d.desc}</div>
-      <div class="details">
-        <div class="detail-box"><i class="fa-solid fa-temperature-half"></i><div class="val">${d.feels}°C</div><div class="lbl">Feels Like</div></div>
-        <div class="detail-box"><i class="fa-solid fa-droplet"></i><div class="val">${d.humidity}%</div><div class="lbl">Humidity</div></div>
-        <div class="detail-box"><i class="fa-solid fa-wind"></i><div class="val">${d.wind} km/h</div><div class="lbl">Wind Speed</div></div>
-        <div class="detail-box"><i class="fa-solid fa-gauge-high"></i><div class="val">${d.pressure}</div><div class="lbl">Pressure (hPa)</div></div>
-      </div>
-    </div>
-    <h3 class="section-title">📅 5-Day Forecast</h3>
-    <div class="forecast">${d.forecast.map(f=>`<div class="forecast-card"><div class="day">${f.day}</div><div class="icon">${f.icon}</div><div class="temps"><span class="high">${f.hi}°</span><span class="low">${f.lo}°</span></div></div>`).join("")}</div>
-    <h3 class="section-title">🕐 Hourly Forecast</h3>
-    <div class="hourly">${d.hourly.map((t,i)=>`<div class="hour-card"><div class="time">${hours[i]}</div><div class="hicon">${i<3?d.icon:["☀️","🌤️","⛅","☁️","🌧️"][i%5]}</div><div class="htemp">${t}°</div></div>`).join("")}</div>
-    <h3 class="section-title">📊 Additional Info</h3>
-    <div class="extras">
-      <div class="extra-card"><i class="fa-solid fa-sun"></i><div class="eval">${d.uv}</div><div class="elbl">UV Index</div></div>
-      <div class="extra-card"><i class="fa-solid fa-eye"></i><div class="eval">${d.visibility}</div><div class="elbl">Visibility</div></div>
-      <div class="extra-card"><i class="fa-solid fa-cloud-sun"></i><div class="eval">${d.sunrise} / ${d.sunset}</div><div class="elbl">Sunrise / Sunset</div></div>
-    </div>`;
+const cities=Object.keys(weatherData);
+let activeCity="New Delhi";
+
+document.getElementById("citiesBar").innerHTML=cities.map(c=>`<div class="city-chip${c===activeCity?" active":""}" onclick="selectCity('${c}')">${c}</div>`).join("");
+
+function selectCity(city){
+  activeCity=city;
+  document.querySelectorAll(".city-chip").forEach(c=>{c.classList.toggle("active",c.textContent===city)});
+  renderWeather();
 }
-document.getElementById("searchBtn").onclick=()=>render(document.getElementById("cityInput").value);
-document.getElementById("cityInput").addEventListener("keydown",e=>{if(e.key==="Enter")render(e.target.value)});
-render("new delhi");
+
+function renderWeather(){
+  const d=weatherData[activeCity];
+  document.getElementById("currentWeather").innerHTML=`<div class="current-left"><div class="location"><i class="fa-solid fa-location-dot"></i> ${activeCity}</div><div class="temp">${d.temp}<sup>°C</sup></div><div class="condition">${d.condition}</div><div class="feels">Feels like ${d.feels}°C</div></div><div class="current-right"><div class="weather-icon">${d.icon}</div><div class="hi-lo">H: <span>${d.hi}°</span> &nbsp; L: <span>${d.lo}°</span></div></div>`;
+  document.getElementById("detailsGrid").innerHTML=`<div class="detail-card"><i class="fa-solid fa-droplet"></i><div class="val">${d.humidity}%</div><div class="label">Humidity</div></div><div class="detail-card"><i class="fa-solid fa-wind"></i><div class="val">${d.wind} km/h</div><div class="label">Wind Speed</div></div><div class="detail-card"><i class="fa-solid fa-sun"></i><div class="val">${d.uv}</div><div class="label">UV Index</div></div><div class="detail-card"><i class="fa-solid fa-eye"></i><div class="val">${d.visibility} km</div><div class="label">Visibility</div></div><div class="detail-card"><i class="fa-solid fa-gauge"></i><div class="val">${d.pressure} hPa</div><div class="label">Pressure</div></div><div class="detail-card"><i class="fa-solid fa-sun" style="color:#fbbf24"></i><div class="val">${d.sunrise} AM</div><div class="label">Sunrise</div></div><div class="detail-card"><i class="fa-solid fa-moon" style="color:#818cf8"></i><div class="val">${d.sunset} PM</div><div class="label">Sunset</div></div><div class="detail-card"><i class="fa-solid fa-temperature-half" style="color:#f87171"></i><div class="val">${d.feels}°C</div><div class="label">Feels Like</div></div>`;
+  document.getElementById("hourlyScroll").innerHTML=d.hourly.map((h,i)=>`<div class="hour-card${i===0?" now":""}"><div class="hour-time">${h.t}</div><div class="hour-icon">${h.i}</div><div class="hour-temp">${h.temp}°</div></div>`).join("");
+  document.getElementById("forecast").innerHTML=d.forecast.map(f=>`<div class="forecast-row"><div class="f-day">${f.day}</div><div class="f-icon">${f.i}</div><div class="f-condition">${f.c}</div><div class="f-bar"><div class="f-bar-fill" style="width:${f.pct}%"></div></div><div class="f-temps"><span class="hi">${f.hi}°</span> / <span class="lo">${f.lo}°</span></div></div>`).join("");
+}
+
+document.getElementById("searchInput").addEventListener("input",function(){
+  const q=this.value.toLowerCase();
+  const found=cities.find(c=>c.toLowerCase().startsWith(q));
+  if(found&&q.length>0)selectCity(found);
+});
+document.getElementById("searchInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter"){const q=this.value.trim().toLowerCase();const found=cities.find(c=>c.toLowerCase()===q);if(found)selectCity(found)}
+});
+
+renderWeather();
 </script>
 </body>
 </html>
