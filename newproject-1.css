@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLY ON WHEELS | Ultra-Luxury Car Rentals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           1. LUXURY DESIGN SYSTEM
+           ========================================= */
+        :root {
+            --primary: #e63946;
+            --primary-dark: #c1121f;
+            --dark: #090a0f;
+            --dark-card: #13151f;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-gold: linear-gradient(135deg, #d4af37 0%, #f7ef8a 50%, #d4af37 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-heavy: rgba(15, 15, 20, 0.95);
+            --shadow-glow: 0 10px 40px rgba(230, 57, 70, 0.15);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--dark); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
+        
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .gold-text { background: var(--accent-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+        .highlight { color: var(--primary); }
+
+        .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+
+        /* Scroll Progress */
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent-gold); width: 0%; z-index: 9999; transition: width 0.1s; }
+
+        /* =========================================
+           2. NAVIGATION
+           ========================================= */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 25px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition);
+        }
+        nav.sticky {
+            background: var(--glass-heavy); backdrop-filter: blur(15px);
+            padding: 15px 50px; border-bottom: 1px solid var(--glass-border);
+        }
+        .logo { font-size: 26px; font-weight: 800; letter-spacing: 1px; color: white; cursor: pointer; }
+        .logo span { color: var(--primary); }
+        
+        .nav-actions { display: flex; gap: 20px; }
+        .nav-btn {
+            background: transparent; color: white; border: 1px solid var(--glass-border);
+            padding: 10px 25px; border-radius: 50px; cursor: pointer; font-size: 14px;
+            transition: var(--transition); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .nav-btn:hover, .nav-btn.active { border-color: var(--primary); background: var(--glass); }
+        .nav-btn.primary { background: var(--primary); border-color: var(--primary); color: white; }
+
+        /* =========================================
+           3. HERO & FILTERS
+           ========================================= */
+        .hero { height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; transition: opacity 1.5s ease; transform: scale(1.1);
+            filter: brightness(0.4); z-index: -1;
+        }
+        .hero-bg.active { opacity: 1; transform: scale(1); }
+        
+        .hero-content { text-align: center; z-index: 2; max-width: 900px; }
+        .hero-content h1 { font-size: clamp(40px, 6vw, 90px); line-height: 1.1; margin-bottom: 25px; }
+
+        .filter-wrapper { position: relative; z-index: 10; margin-top: -50px; }
+        .filter-bar {
+            background: rgba(19, 21, 31, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            padding: 20px 30px; display: flex; flex-wrap: wrap; gap: 20px;
+            justify-content: space-between; align-items: center;
+        }
+        .filter-chip {
+            padding: 8px 20px; border-radius: 20px; background: var(--glass);
+            border: 1px solid var(--glass-border); color: var(--text-muted); cursor: pointer;
+            transition: 0.3s; font-size: 13px;
+        }
+        .filter-chip.active { background: var(--primary); color: white; }
+
+        .search-input {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 10px 20px; border-radius: 20px; color: white; outline: none;
+        }
+
+        /* =========================================
+           4. CAR GRID & CARDS
+           ========================================= */
+        .car-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .car-card {
+            background: var(--dark-card); border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--glass-border); transition: var(--transition);
+        }
+        .car-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .card-image-wrapper { height: 200px; overflow: hidden; }
+        .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 20px; }
+        
+        .specs-row { display: flex; justify-content: space-between; margin: 15px 0; padding-top: 15px; border-top: 1px solid var(--glass-border); }
+        .spec-item { font-size: 12px; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 5px; }
+
+        /* =========================================
+           5. DASHBOARD & AUTH MODAL
+           ========================================= */
+        #dashboard-view { display: none; padding-top: 120px; min-height: 100vh;}
+        .dash-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; }
+        .dash-sidebar { background: var(--dark-card); padding: 30px; border-radius: 20px; border: 1px solid var(--glass-border); height: fit-content;}
+        .dash-card-lg { background: var(--dark-card); padding: 30px; border-radius: 20px; border: 1px solid var(--glass-border); margin-bottom: 20px; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+            display: none; align-items: center; justify-content: center; z-index: 2000;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-content { background: var(--dark-card); width: 95%; max-width: 450px; padding: 40px; border-radius: 20px; border: 1px solid var(--glass-border); }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
+        .form-input { width: 100%; padding: 12px; background: var(--glass); border: 1px solid var(--glass-border); color: white; border-radius: 8px; margin-top: 5px; outline: none;}
+        .form-input:focus { border-color: var(--primary); }
+
+        footer { background: #050608; padding: 80px 0 30px; border-top: 1px solid var(--glass-border); margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+
+        @media (max-width: 768px) {
+            .dash-layout { grid-template-columns: 1fr; }
+            nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress"></div>
+
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="gold-text" style="margin-bottom: 10px;">Member Access</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Unlock exclusive rates and instant booking.</p>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="login-email" class="form-input" placeholder="alex@luxury.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="login-pass" class="form-input" placeholder="••••••••">
+            </div>
+            <button class="nav-btn primary" style="width: 100%; margin-top: 10px;" onclick="processLogin()">Sign In</button>
+            <p onclick="closeAuth()" style="text-align: center; margin-top: 20px; font-size: 13px; cursor: pointer; color: var(--text-muted);">Continue as Guest</p>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <div class="logo" onclick="showMainView()">FLY ON <span>WHEELS</span></div>
+        <div class="nav-actions">
+            <button class="nav-btn active" id="nav-home" onclick="showMainView()">Home</button>
+            <button class="nav-btn primary" id="auth-nav-btn" onclick="handleDashClick()">Login</button>
+        </div>
+    </nav>
+
+    <div id="dashboard-view" class="container">
+        <div class="dash-layout">
+            <div class="dash-sidebar">
+                <div class="text-center" style="margin-bottom: 30px;">
+                    <div style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px;"><i class="fas fa-user"></i></div>
+                    <h3 id="user-display-name">Alex Doe</h3>
+                    <span class="gold-text" style="font-size: 12px; letter-spacing: 2px;">GOLD MEMBER</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="nav-btn active" style="width: 100%; text-align: left;"><i class="fas fa-th-large" style="margin-right: 10px;"></i> Overview</button>
+                    <button class="nav-btn" style="width: 100%; text-align: left;"><i class="fas fa-history" style="margin-right: 10px;"></i> My Rentals</button>
+                    <button class="nav-btn" onclick="logout()" style="width: 100%; text-align: left; color: var(--primary); margin-top: 20px;"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Logout</button>
+                </div>
+            </div>
+            <div class="dash-content">
+                <div class="dash-card-lg">
+                    <h3 style="margin-bottom: 25px;">Welcome Back!</h3>
+                    <div style="padding: 20px; background: var(--glass); border-radius: 15px; border: 1px solid var(--glass-border);">
+                        <p style="color: var(--text-muted);">Current Activity</p>
+                        <h4 style="margin-top: 10px;">No active reservations found.</h4>
+                        <button class="nav-btn primary" style="margin-top: 20px;" onclick="showMainView()">Book a Ride</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-view">
+        <section class="hero">
+            <div class="hero-bg active" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000');"></div>
+            <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2000');"></div>
+            <div class="hero-content">
+                <span class="highlight" style="letter-spacing: 5px; text-transform: uppercase;">Beyond Transportation</span>
+                <h1>Drive the <span class="gold-text">Extraordinary</span></h1>
+                <p style="color: #ccc; margin-bottom: 30px;">Curated luxury. Delivered to your door. Experience the thrill.</p>
+                <button class="nav-btn primary" onclick="document.getElementById('fleet').scrollIntoView()">Explore Collection</button>
+            </div>
+        </section>
+
+        <div class="container filter-wrapper">
+            <div class="filter-bar">
+                <div style="display: flex; gap: 10px;" id="cat-filters">
+                    <div class="filter-chip active" data-filter="all">All Cars</div>
+                    <div class="filter-chip" data-filter="supercar">Supercars</div>
+                    <div class="filter-chip" data-filter="suv">SUVs</div>
+                </div>
+                <input type="text" class="search-input" id="car-search" placeholder="Search model...">
+            </div>
+        </div>
+
+        <section class="container section-padding" id="fleet">
+            <h2 class="text-center" style="margin-bottom: 50px;">The <span class="gold-text">Showcase</span></h2>
+            <div class="car-grid" id="car-grid">
+                <div class="car-card" data-category="supercar">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=600">
+                    </div>
+                    <div class="card-content">
+                        <span style="color: var(--primary); font-size: 12px;">Mercedes-Benz</span>
+                        <h3 class="card-title">AMG GT Coupe</h3>
+                        <div class="specs-row">
+                            <div class="spec-item"><i class="fas fa-bolt"></i> 3.2s</div>
+                            <div class="spec-item"><i class="fas fa-chair"></i> 2 Seats</div>
+                            <div class="spec-item"><i class="fas fa-gas-pump"></i> Petrol</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; font-size: 1.2rem;">$450<small style="font-weight: 400; color: var(--text-muted);">/day</small></span>
+                            <button class="nav-btn primary" onclick="openBooking('AMG GT Coupe', 450)">Reserve</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="car-card" data-category="suv">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=600">
+                    </div>
+                    <div class="card-content">
+                        <span style="color: var(--primary); font-size: 12px;">Lamborghini</span>
+                        <h3 class="card-title">Urus S</h3>
+                        <div class="specs-row">
+                            <div class="spec-item"><i class="fas fa-bolt"></i> 3.1s</div>
+                            <div class="spec-item"><i class="fas fa-chair"></i> 5 Seats</div>
+                            <div class="spec-item"><i class="fas fa-gas-pump"></i> Petrol</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; font-size: 1.2rem;">$1200<small style="font-weight: 400; color: var(--text-muted);">/day</small></span>
+                            <button class="nav-btn primary" onclick="openBooking('Lamborghini Urus', 1200)">Reserve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: #0e0f14; padding: 60px 0; border-top: 1px solid var(--glass-border);">
+            <div class="container" style="display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 30px;">
+                <div><div class="stat-num" style="font-size: 3rem; color: var(--primary); font-weight: 700;" data-target="1500">0</div><p>Rides Completed</p></div>
+                <div><div class="stat-num" style="font-size: 3rem; color: var(--primary); font-weight: 700;" data-target="45">0</div><p>Exotic Cars</p></div>
+                <div><div class="stat-num" style="font-size: 3rem; color: var(--primary); font-weight: 700;" data-target="100">0</div><p>% Satisfaction</p></div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container footer-grid">
+                <div>
+                    <div class="logo">FLY ON <span>WHEELS</span></div>
+                    <p style="color: var(--text-muted); margin-top: 15px;">Elite mobility solutions.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <p style="color: var(--text-muted); cursor: pointer;">About Us</p>
+                    <p style="color: var(--text-muted); cursor: pointer;">Privacy Policy</p>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p style="color: var(--text-muted);">support@flywheels.com</p>
+                    <div style="margin-top: 10px; display: flex; gap: 15px;">
+                        <i class="fab fa-instagram"></i><i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal-content">
+            <h2 id="modal-car-name">Reserve Car</h2>
+            <div class="form-group">
+                <label class="form-label">Select Pickup Date</label>
+                <input type="date" class="form-input">
+            </div>
+            <button class="nav-btn primary" style="width: 100%;" onclick="closeModal(true)">Confirm Reservation</button>
+            <p onclick="closeModal(false)" style="text-align: center; margin-top: 15px; font-size: 12px; cursor: pointer; color: var(--text-muted);">Cancel</p>
+        </div>
+    </div>
+
+    <script>
+        // --- AUTH & VIEW LOGIC ---
+        let isLoggedIn = false;
+
+        function handleDashClick() {
+            if (isLoggedIn) {
+                showDashboard();
+            } else {
+                document.getElementById('auth-modal').classList.add('open');
+            }
+        }
+
+        function closeAuth() {
+            document.getElementById('auth-modal').classList.remove('open');
+        }
+
+        function processLogin() {
+            const email = document.getElementById('login-email').value;
+            if (email.includes('@')) {
+                isLoggedIn = true;
+                document.getElementById('user-display-name').innerText = email.split('@')[0].toUpperCase();
+                document.getElementById('auth-nav-btn').innerText = "Dashboard";
+                closeAuth();
+                showDashboard();
+            } else {
+                alert("Please enter a valid email to continue.");
+            }
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('auth-nav-btn').innerText = "Login";
+            showMainView();
+        }
+
+        function showDashboard() {
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            document.getElementById('nav-home').classList.remove('active');
+            document.getElementById('auth-nav-btn').classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function showMainView() {
+            document.getElementById('main-view').style.display = 'block';
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('nav-home').classList.add('active');
+            document.getElementById('auth-nav-btn').classList.remove('active');
+            window.scrollTo(0,0);
+        }
+
+        // --- HERO SLIDER ---
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.hero-bg');
+        function rotateHero() {
+            slides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+        setInterval(rotateHero, 5000);
+
+        // --- FILTERING ---
+        const chips = document.querySelectorAll('.filter-chip');
+        const search = document.getElementById('car-search');
+        const cars = document.querySelectorAll('.car-card');
+
+        function filterCars() {
+            const activeCat = document.querySelector('.filter-chip.active').dataset.filter;
+            const term = search.value.toLowerCase();
+            cars.forEach(car => {
+                const catMatch = activeCat === 'all' || car.dataset.category === activeCat;
+                const nameMatch = car.querySelector('h3').innerText.toLowerCase().includes(term);
+                car.style.display = (catMatch && nameMatch) ? 'block' : 'none';
+            });
+        }
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                filterCars();
+            });
+        });
+        search.addEventListener('input', filterCars);
+
+        // --- BOOKING MODAL ---
+        function openBooking(name, price) {
+            if(!isLoggedIn) {
+                document.getElementById('auth-modal').classList.add('open');
+                return;
+            }
+            document.getElementById('modal-car-name').innerText = "Reserve " + name;
+            document.getElementById('booking-modal').classList.add('open');
+        }
+
+        function closeModal(isSuccess) {
+            document.getElementById('booking-modal').classList.remove('open');
+            if(isSuccess) alert("Reservation Requested! Check your Dashboard for status updates.");
+        }
+
+        // --- SCROLL EFFECTS ---
+        window.onscroll = () => {
+            const nav = document.getElementById('navbar');
+            const progress = document.querySelector('.scroll-progress');
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            progress.style.width = (winScroll / height) * 100 + "%";
+            
+            if (winScroll > 50) nav.classList.add("sticky");
+            else nav.classList.remove("sticky");
+        };
+
+        // --- STAT COUNTER ---
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const target = +entry.target.dataset.target;
+                    let count = 0;
+                    const update = () => {
+                        const inc = target / 40;
+                        if(count < target) {
+                            count += Math.ceil(inc);
+                            entry.target.innerText = count;
+                            setTimeout(update, 30);
+                        } else entry.target.innerText = target;
+                    };
+                    update();
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, {threshold: 1});
+        document.querySelectorAll('.stat-num').forEach(n => obs.observe(n));
+    </script>
+</body>
+</html>

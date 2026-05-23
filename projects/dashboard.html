@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Dashboard | Ashish Varghese</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+:root{--bg:#0a0e1a;--card:#131833;--accent:#00d4ff;--text:#e4e6eb}
+body{background:var(--bg);color:var(--text);min-height:100vh}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;color:var(--accent);font-size:14px;text-decoration:none;transition:.3s}.back-link:hover{opacity:.7}
+.dashboard{padding:0 30px 40px}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;flex-wrap:wrap;gap:10px}
+.dash-header h1{font-size:26px}.dash-header h1 span{color:var(--accent)}
+.dash-date{font-size:13px;opacity:.5}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:25px}
+.stat-card{background:var(--card);border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,.04);transition:.3s;position:relative;overflow:hidden}
+.stat-card:hover{border-color:rgba(0,212,255,.2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,212,255,.08)}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;border-radius:50%;filter:blur(40px);opacity:.15}
+.stat-card:nth-child(1)::before{background:#00d4ff}
+.stat-card:nth-child(2)::before{background:#00e676}
+.stat-card:nth-child(3)::before{background:#ffc107}
+.stat-card:nth-child(4)::before{background:#7b2ff7}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.stat-card:nth-child(1) .stat-icon{background:rgba(0,212,255,.12);color:#00d4ff}
+.stat-card:nth-child(2) .stat-icon{background:rgba(0,230,118,.12);color:#00e676}
+.stat-card:nth-child(3) .stat-icon{background:rgba(255,193,7,.12);color:#ffc107}
+.stat-card:nth-child(4) .stat-icon{background:rgba(123,47,247,.12);color:#7b2ff7}
+.stat-label{font-size:13px;opacity:.5;margin-bottom:4px}
+.stat-value{font-size:28px;font-weight:700}
+.stat-change{font-size:12px;margin-top:6px;display:flex;align-items:center;gap:4px}
+.stat-change.up{color:#00e676}
+.stat-change.down{color:#ff4757}
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:25px}
+.chart-card{background:var(--card);border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,.04)}
+.chart-card h3{font-size:16px;margin-bottom:18px;font-weight:600}
+.bar-chart{display:flex;align-items:flex-end;gap:12px;height:180px;padding-top:10px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#00d4ff,#0098b3);transition:height 1s cubic-bezier(.4,0,.2,1);position:relative;min-width:20px}
+.bar:hover{background:linear-gradient(180deg,#00d4ff,#7b2ff7);box-shadow:0 0 15px rgba(0,212,255,.3)}
+.bar-label{font-size:11px;opacity:.4}
+.bar-value{font-size:11px;color:var(--accent);font-weight:600}
+.donut-wrap{display:flex;flex-direction:column;align-items:center;gap:20px}
+.donut{position:relative;width:160px;height:160px}
+.donut canvas{width:160px;height:160px}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.donut-center .num{font-size:28px;font-weight:700;color:var(--accent)}
+.donut-center .sub{font-size:11px;opacity:.4}
+.legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+.table-card{background:var(--card);border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,.04)}
+.table-card h3{font-size:16px;margin-bottom:15px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 15px;text-align:left;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+th{opacity:.4;font-weight:500;font-size:12px;text-transform:uppercase}
+tr:hover{background:rgba(0,212,255,.03)}
+.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.badge.completed{background:rgba(0,230,118,.12);color:#00e676}
+.badge.pending{background:rgba(255,193,7,.12);color:#ffc107}
+.badge.failed{background:rgba(255,71,87,.12);color:#ff4757}
+.avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:10px;vertical-align:middle}
+@media(max-width:900px){.charts-row{grid-template-columns:1fr}}
+@media(max-width:600px){.dashboard{padding:0 15px 30px}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+<div class="dashboard">
+  <div class="dash-header"><h1>Analytics <span>Dashboard</span></h1><div class="dash-date" id="dateTime"></div></div>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-label">Total Users</div><div class="stat-value" data-target="12847">0</div><div class="stat-change up"><i class="fa-solid fa-arrow-up"></i> 12.5% from last month</div></div>
+    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="stat-label">Revenue</div><div class="stat-value" data-target="48290" data-prefix="$">$0</div><div class="stat-change up"><i class="fa-solid fa-arrow-up"></i> 8.2% from last month</div></div>
+    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-shopping-bag"></i></div><div class="stat-label">Orders</div><div class="stat-value" data-target="1523">0</div><div class="stat-change up"><i class="fa-solid fa-arrow-up"></i> 5.1% from last month</div></div>
+    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div><div class="stat-label">Growth</div><div class="stat-value" data-target="24" data-suffix=".5%">0%</div><div class="stat-change down"><i class="fa-solid fa-arrow-down"></i> 2.3% from last month</div></div>
+  </div>
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Monthly Revenue</h3>
+      <div class="bar-chart" id="barChart"></div>
+    </div>
+    <div class="chart-card">
+      <h3>Traffic Sources</h3>
+      <div class="donut-wrap">
+        <div class="donut"><canvas id="donutCanvas" width="160" height="160"></canvas><div class="donut-center"><div class="num">28.4K</div><div class="sub">visitors</div></div></div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#00d4ff"></div>Direct 40%</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#7b2ff7"></div>Social 30%</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#00e676"></div>Organic 20%</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ffc107"></div>Referral 10%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-card">
+    <h3>Recent Transactions</h3>
+    <table>
+      <thead><tr><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+      <tbody>
+        <tr><td><img class="avatar" src="https://i.pravatar.cc/32?img=1" alt="">Rahul Sharma</td><td>$1,250.00</td><td><span class="badge completed">Completed</span></td><td>May 22, 2026</td></tr>
+        <tr><td><img class="avatar" src="https://i.pravatar.cc/32?img=2" alt="">Priya Patel</td><td>$890.50</td><td><span class="badge completed">Completed</span></td><td>May 21, 2026</td></tr>
+        <tr><td><img class="avatar" src="https://i.pravatar.cc/32?img=3" alt="">Amit Kumar</td><td>$2,100.00</td><td><span class="badge pending">Pending</span></td><td>May 20, 2026</td></tr>
+        <tr><td><img class="avatar" src="https://i.pravatar.cc/32?img=4" alt="">Sneha Reddy</td><td>$450.75</td><td><span class="badge completed">Completed</span></td><td>May 19, 2026</td></tr>
+        <tr><td><img class="avatar" src="https://i.pravatar.cc/32?img=5" alt="">Vikram Singh</td><td>$3,200.00</td><td><span class="badge failed">Failed</span></td><td>May 18, 2026</td></tr>
+        <tr><td><img class="avatar" src="https://i.pravatar.cc/32?img=6" alt="">Neha Gupta</td><td>$1,780.25</td><td><span class="badge completed">Completed</span></td><td>May 17, 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+// Date
+document.getElementById("dateTime").textContent=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+// Animated counters
+document.querySelectorAll(".stat-value").forEach(el=>{const target=+el.dataset.target;const prefix=el.dataset.prefix||"";const suffix=el.dataset.suffix||"";let current=0;const step=target/60;const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=prefix+Math.floor(current).toLocaleString()+suffix},25)});
+// Bar chart
+const months=["Jan","Feb","Mar","Apr","May","Jun"];
+const values=[28,35,42,38,52,48];
+const maxVal=Math.max(...values);
+document.getElementById("barChart").innerHTML=months.map((m,i)=>`<div class="bar-col"><div class="bar-value">$${values[i]}K</div><div class="bar" style="height:0%" data-h="${(values[i]/maxVal*100)}%"></div><div class="bar-label">${m}</div></div>`).join("");
+setTimeout(()=>{document.querySelectorAll(".bar").forEach(b=>{b.style.height=b.dataset.h})},100);
+// Donut chart
+const ctx=document.getElementById("donutCanvas").getContext("2d");
+const data=[40,30,20,10];const colors=["#00d4ff","#7b2ff7","#00e676","#ffc107"];
+let startAngle=-Math.PI/2;
+data.forEach((val,i)=>{const slice=val/100*Math.PI*2;ctx.beginPath();ctx.arc(80,80,65,startAngle,startAngle+slice);ctx.lineWidth=22;ctx.strokeStyle=colors[i];ctx.stroke();startAngle+=slice});
+</script>
+</body>
+</html>

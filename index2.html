@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLY ON WHEELS | Luxury Car Rentals India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root {
+            --primary: #e63946;
+            --dark: #0b0d17;
+            --accent: #ffb703;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--dark); color: white; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- Header & Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: 0.5s; background: rgba(11, 13, 23, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+        .logo span { color: white; }
+        .nav-links button {
+            background: var(--primary); color: white; border: none;
+            padding: 10px 25px; border-radius: 30px; cursor: pointer; font-weight: 600;
+            transition: 0.3s;
+        }
+        .nav-links button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
+
+        /* --- Hero Slider --- */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-main { position: absolute; width: 100%; height: 100%; z-index: -1; }
+        .slide-main {
+            position: absolute; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0;
+            animation: slideAnim 15s infinite;
+        }
+        .slide-main:nth-child(2) { animation-delay: 5s; }
+        .slide-main:nth-child(3) { animation-delay: 10s; }
+
+        @keyframes slideAnim {
+            0% { opacity: 0; transform: scale(1.1); }
+            10% { opacity: 1; }
+            33% { opacity: 1; }
+            43% { opacity: 0; transform: scale(1); }
+            100% { opacity: 0; }
+        }
+
+        .hero::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), var(--dark));
+        }
+
+        .hero-content { text-align: center; z-index: 10; }
+        .hero-content h1 { font-size: clamp(40px, 8vw, 80px); line-height: 1.1; margin-bottom: 20px; }
+        .highlight { color: var(--primary); }
+
+        /* --- LOGIN MODAL WITH ANIMATED SLIDESHOW BACKGROUND --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; 
+            justify-content: center; align-items: center;
+            overflow: hidden;
+        }
+
+        /* Modal Background Slideshow */
+        .modal-slideshow {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        .modal-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0;
+            filter: brightness(0.4); /* Darkens images so form is readable */
+            animation: modalFade 12s infinite;
+        }
+        .modal-slide:nth-child(2) { animation-delay: 4s; }
+        .modal-slide:nth-child(3) { animation-delay: 8s; }
+
+        @keyframes modalFade {
+            0% { opacity: 0; transform: scale(1); }
+            10% { opacity: 1; }
+            33% { opacity: 1; }
+            43% { opacity: 0; transform: scale(1.1); }
+            100% { opacity: 0; }
+        }
+
+        .modal-content {
+            position: relative; z-index: 10;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px; border-radius: 24px;
+            width: 90%; max-width: 420px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: modalSlideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes modalSlideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .login-form label { font-size: 14px; color: #ccc; display: block; margin-top: 15px; }
+        .login-form input {
+            width: 100%; padding: 14px; margin-top: 5px; 
+            border: 1px solid rgba(255,255,255,0.2); 
+            border-radius: 12px; background: rgba(255,255,255,0.1);
+            color: white; outline: none; transition: 0.3s;
+        }
+        .login-form input:focus { border-color: var(--primary); background: rgba(255,255,255,0.2); }
+
+        .login-btn { 
+            width: 100%; background: var(--primary); color: white; 
+            padding: 14px; border: none; border-radius: 12px; 
+            margin-top: 25px; cursor: pointer; font-weight: 600;
+            transition: 0.3s;
+        }
+        .login-btn:hover { background: #ff4d5a; transform: translateY(-2px); }
+
+        /* --- Rest of the sections --- */
+        .car-section { padding: 80px 10%; }
+        .car-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .car-card { background: #1a1c2c; border-radius: 20px; overflow: hidden; position: relative; }
+        .car-card img { width: 100%; height: 250px; object-fit: cover; }
+        .car-tag { position: absolute; top: 15px; left: 15px; background: var(--accent); color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; z-index: 5; }
+        .car-details { padding: 25px; }
+
+    </style>
+</head>
+<body>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-slideshow">
+            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop');"></div>
+        </div>
+        
+        <div class="modal-content">
+            <span style="position:absolute; right:25px; top:20px; cursor:pointer; font-size:24px;" onclick="closeLogin()">&times;</span>
+            <h2 style="font-weight: 800; margin-bottom: 5px;">Member Access</h2>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 20px;">Authorize your session to view the fleet.</p>
+            
+            <form class="login-form">
+                <label>Email Address</label>
+                <input type="email" placeholder="name@company.com" required>
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" required>
+                <button type="submit" class="login-btn">Secure Login</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #bbb;">
+                New member? <span style="color: var(--primary); cursor: pointer; font-weight: 600;">Apply for Access</span>
+            </p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="logo">FLY ON <span>WHEELS</span></div>
+        <div class="nav-links">
+            <button onclick="openLogin()">Member Login</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="slider-main">
+            <div class="slide-main" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2000');"></div>
+            <div class="slide-main" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=2000');"></div>
+            <div class="slide-main" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000');"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="reveal">Experience The<br><span class="highlight">Elite Drive</span></h1>
+            <p class="reveal">Curated Luxury. Nationwide Reach. Ashish's Signature Service.</p>
+        </div>
+    </section>
+
+    <section class="car-section">
+        <h2 style="text-align: center; margin-bottom: 50px;">The Showcase</h2>
+        <div class="car-grid">
+            <div class="car-card reveal">
+                <div class="car-tag">MOST POPULAR</div>
+                <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2070&auto=format&fit=crop" alt="Car">
+                <div class="car-details">
+                    <h3>Mercedes-AMG GT</h3>
+                    <p>Performance • Pearl White</p>
+                    <button class="login-btn">Reserve Now</button>
+                </div>
+            </div>
+            <div class="car-card reveal">
+                <div class="car-tag">NEW ARRIVAL</div>
+                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=2070&auto=format&fit=crop" alt="Car">
+                <div class="car-details">
+                    <h3>BMW 8 Series</h3>
+                    <p>Executive • Obsidian Black</p>
+                    <button class="login-btn">Reserve Now</button>
+                </div>
+            </div>
+            <div class="car-card reveal">
+                <div class="car-tag">VINTAGE</div>
+                <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2072&auto=format&fit=crop" alt="Car">
+                <div class="car-details">
+                    <h3>Classic Mustang</h3>
+                    <p>Collector • Ruby Red</p>
+                    <button class="login-btn">Reserve Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 50px; text-align: center; border-top: 1px solid #222;">
+        <p>FLY ON WHEELS &copy; 2026 | Designed By Team 2</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById("loginModal");
+        function openLogin() { modal.style.display = "flex"; }
+        function closeLogin() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) closeLogin(); }
+
+        ScrollReveal().reveal('.reveal', {
+            delay: 200,
+            distance: '50px',
+            origin: 'bottom',
+            duration: 1000,
+            interval: 200
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudSync — Landing Page | Ashish Varghese</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth}
+:root{--bg:#0a0e1a;--card:#131833;--accent:#00d4ff;--text:#e4e6eb;--purple:#7b2ff7}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;color:var(--accent);font-size:14px;text-decoration:none;transition:.3s;position:relative;z-index:10}.back-link:hover{opacity:.7}
+/* Nav */
+.nav{position:fixed;top:0;width:100%;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(10,14,26,.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,212,255,.08)}
+.nav-logo{font-size:22px;font-weight:700;color:var(--text);text-decoration:none}.nav-logo span{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:30px}
+.nav-links a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;transition:.3s;opacity:.7}
+.nav-links a:hover{opacity:1;color:var(--accent)}
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 70%);top:-100px;right:-100px;border-radius:50%}
+.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(123,47,247,.08),transparent 70%);bottom:-50px;left:-50px;border-radius:50%}
+.hero-content{position:relative;z-index:1;max-width:700px}
+.hero h1{font-size:56px;font-weight:700;line-height:1.15;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;opacity:.6;line-height:1.7;margin-bottom:35px}
+.cta-btn{display:inline-block;padding:16px 40px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;transition:.4s;text-decoration:none;box-shadow:0 4px 25px rgba(0,212,255,.3)}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(0,212,255,.5)}
+/* Floating shapes */
+.shape{position:absolute;border-radius:50%;opacity:.06;animation:floatShape 8s ease-in-out infinite}
+.shape:nth-child(1){width:300px;height:300px;background:var(--accent);top:10%;left:5%;animation-delay:0s}
+.shape:nth-child(2){width:200px;height:200px;background:var(--purple);top:60%;right:10%;animation-delay:2s}
+.shape:nth-child(3){width:150px;height:150px;background:var(--accent);bottom:10%;left:30%;animation-delay:4s}
+@keyframes floatShape{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(5deg)}}
+/* Sections */
+section{padding:80px 5%}
+.section-title{text-align:center;font-size:36px;font-weight:700;margin-bottom:15px}
+.section-title span{color:var(--accent)}
+.section-sub{text-align:center;font-size:16px;opacity:.5;margin-bottom:50px;max-width:600px;margin-left:auto;margin-right:auto}
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
+.feature-card{background:rgba(19,24,51,.6);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,.08);border-radius:20px;padding:35px 25px;text-align:center;transition:.4s}
+.feature-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-8px);box-shadow:0 15px 40px rgba(0,212,255,.1)}
+.feature-icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 18px;background:rgba(0,212,255,.1);color:var(--accent)}
+.feature-card h3{font-size:20px;margin-bottom:10px}
+.feature-card p{font-size:14px;opacity:.5;line-height:1.7}
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:950px;margin:0 auto}
+.price-card{background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:20px;padding:35px 28px;text-align:center;transition:.4s;position:relative}
+.price-card:hover{transform:translateY(-5px)}
+.price-card.popular{border-color:rgba(0,212,255,.3);box-shadow:0 10px 40px rgba(0,212,255,.1)}
+.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--purple));padding:4px 20px;border-radius:20px;font-size:12px;font-weight:600;color:#fff}
+.price-name{font-size:20px;font-weight:600;margin-bottom:5px}
+.price-amount{font-size:42px;font-weight:700;margin:15px 0}
+.price-amount span{font-size:16px;opacity:.4;font-weight:400}
+.price-amount .currency{font-size:22px}
+.price-features{list-style:none;margin:20px 0 30px;text-align:left}
+.price-features li{padding:8px 0;font-size:14px;opacity:.6;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.03)}
+.price-features li i{color:var(--accent);font-size:14px}
+.price-btn{width:100%;padding:12px;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer;transition:.3s;border:none;font-family:'Poppins',sans-serif}
+.price-btn.outline{background:none;border:1px solid var(--accent);color:var(--accent)}
+.price-btn.outline:hover{background:var(--accent);color:var(--bg)}
+.price-btn.filled{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff}
+.price-btn.filled:hover{box-shadow:0 4px 20px rgba(0,212,255,.4)}
+/* Stats */
+.stats-section{background:var(--card);border-top:1px solid rgba(0,212,255,.08);border-bottom:1px solid rgba(0,212,255,.08)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:800px;margin:0 auto;text-align:center}
+.stat-num{font-size:42px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:14px;opacity:.4;margin-top:5px}
+/* Testimonials */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
+.testimonial{background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:20px;padding:28px;transition:.3s}
+.testimonial:hover{border-color:rgba(0,212,255,.15)}
+.testimonial-text{font-size:14px;opacity:.6;line-height:1.8;margin-bottom:18px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-author img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.testimonial-name{font-size:14px;font-weight:600}
+.testimonial-role{font-size:12px;opacity:.4}
+/* Footer */
+.footer{padding:40px 5%;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.footer-text{font-size:13px;opacity:.4}
+.footer-links{display:flex;gap:18px}
+.footer-links a{color:var(--text);opacity:.4;font-size:18px;transition:.3s;text-decoration:none}
+.footer-links a:hover{opacity:1;color:var(--accent)}
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.hero h1{font-size:36px}.features-grid,.pricing-grid,.testimonials-grid,.stats-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+<nav class="nav"><a href="#" class="nav-logo">Cloud<span>Sync</span></a><div class="nav-links"><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#testimonials">About</a></div></nav>
+
+<section class="hero">
+  <div class="shape"></div><div class="shape"></div><div class="shape"></div>
+  <div class="hero-content">
+    <h1>Your Files, <span>Everywhere.</span></h1>
+    <p>Store, share, and collaborate on files from anywhere. CloudSync gives you lightning-fast cloud storage with enterprise-grade security.</p>
+    <a href="#pricing" class="cta-btn">Get Started Free →</a>
+  </div>
+</section>
+
+<section id="features">
+  <h2 class="section-title reveal">Powerful <span>Features</span></h2>
+  <p class="section-sub reveal">Everything you need to manage your files efficiently</p>
+  <div class="features-grid">
+    <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div><h3>End-to-End Encryption</h3><p>Your files are encrypted at rest and in transit. Zero-knowledge architecture ensures only you can access your data.</p></div>
+    <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-bolt"></i></div><h3>Lightning Fast</h3><p>Upload and download at blazing speeds with our global CDN. Smart caching ensures instant access to your most-used files.</p></div>
+    <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-users"></i></div><h3>Team Collaboration</h3><p>Real-time collaboration with shared folders, comments, and version history. Keep your whole team in sync effortlessly.</p></div>
+  </div>
+</section>
+
+<section class="stats-section" id="stats">
+  <div class="stats-grid">
+    <div class="reveal"><div class="stat-num" data-target="10">0</div><div class="stat-label">Million+ Users</div></div>
+    <div class="reveal"><div class="stat-num" data-target="99">0</div><div class="stat-label">.9% Uptime</div></div>
+    <div class="reveal"><div class="stat-num" data-target="150">0</div><div class="stat-label">+ Countries</div></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2 class="section-title reveal">Simple <span>Pricing</span></h2>
+  <p class="section-sub reveal">No hidden fees. Upgrade, downgrade, or cancel anytime.</p>
+  <div class="pricing-grid">
+    <div class="price-card reveal"><div class="price-name">Free</div><div class="price-amount"><span class="currency">$</span>0<span>/mo</span></div><ul class="price-features"><li><i class="fa-solid fa-check"></i>5 GB Storage</li><li><i class="fa-solid fa-check"></i>2 Devices</li><li><i class="fa-solid fa-check"></i>Basic Support</li><li><i class="fa-solid fa-check"></i>File Sharing</li></ul><button class="price-btn outline">Get Started</button></div>
+    <div class="price-card popular reveal"><div class="popular-badge">Most Popular</div><div class="price-name">Pro</div><div class="price-amount"><span class="currency">$</span>9<span>/mo</span></div><ul class="price-features"><li><i class="fa-solid fa-check"></i>200 GB Storage</li><li><i class="fa-solid fa-check"></i>Unlimited Devices</li><li><i class="fa-solid fa-check"></i>Priority Support</li><li><i class="fa-solid fa-check"></i>Team Collaboration</li><li><i class="fa-solid fa-check"></i>Version History</li></ul><button class="price-btn filled">Get Started</button></div>
+    <div class="price-card reveal"><div class="price-name">Enterprise</div><div class="price-amount"><span class="currency">$</span>29<span>/mo</span></div><ul class="price-features"><li><i class="fa-solid fa-check"></i>2 TB Storage</li><li><i class="fa-solid fa-check"></i>Unlimited Everything</li><li><i class="fa-solid fa-check"></i>24/7 Dedicated Support</li><li><i class="fa-solid fa-check"></i>Admin Controls</li><li><i class="fa-solid fa-check"></i>Custom Branding</li></ul><button class="price-btn outline">Contact Sales</button></div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <h2 class="section-title reveal">What People <span>Say</span></h2>
+  <p class="section-sub reveal">Trusted by thousands of professionals worldwide</p>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal"><div class="testimonial-text">"CloudSync has completely transformed how our team collaborates. The speed and security are unmatched. We migrated from Dropbox and never looked back."</div><div class="testimonial-author"><img src="https://i.pravatar.cc/80?img=32" alt=""><div><div class="testimonial-name">Sarah Chen</div><div class="testimonial-role">CTO, TechVentures</div></div></div></div>
+    <div class="testimonial reveal"><div class="testimonial-text">"As a freelance designer, I need instant access to my files from anywhere. CloudSync delivers every time with zero lag. The free tier is incredibly generous."</div><div class="testimonial-author"><img src="https://i.pravatar.cc/80?img=45" alt=""><div><div class="testimonial-name">Marcus Rivera</div><div class="testimonial-role">Freelance Designer</div></div></div></div>
+    <div class="testimonial reveal"><div class="testimonial-text">"The enterprise features are exactly what we needed. Admin controls, audit logs, and custom branding made it the perfect choice for our 200+ person organization."</div><div class="testimonial-author"><img src="https://i.pravatar.cc/80?img=28" alt=""><div><div class="testimonial-name">Aisha Patel</div><div class="testimonial-role">VP Engineering, InnovateCo</div></div></div></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-text">© 2026 CloudSync. Designed by Ashish Varghese.</div>
+  <div class="footer-links"><a href="#"><i class="fa-brands fa-twitter"></i></a><a href="#"><i class="fa-brands fa-github"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+// Animated counters
+const statObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target;const target=+el.dataset.target;let current=0;const step=target/50;const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=Math.floor(current)},30);statObs.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll(".stat-num").forEach(el=>statObs.observe(el));
+</script>
+</body>
+</html>

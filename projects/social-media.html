@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Feed | Ashish Varghese</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+:root{--bg:#0a0e1a;--card:#131833;--accent:#00d4ff;--text:#e4e6eb}
+body{background:var(--bg);color:var(--text)}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;color:var(--accent);font-size:14px;text-decoration:none;transition:.3s}.back-link:hover{opacity:.7}
+.layout{display:grid;grid-template-columns:240px 1fr 280px;gap:20px;max-width:1100px;margin:0 auto;padding:0 20px 40px}
+/* Sidebar */
+.sidebar{position:sticky;top:20px;height:fit-content}
+.sidebar-nav{background:var(--card);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,.04)}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 15px;border-radius:12px;color:var(--text);cursor:pointer;transition:.3s;font-size:15px;text-decoration:none}
+.nav-item:hover,.nav-item.active{background:rgba(0,212,255,.08);color:var(--accent)}
+.nav-item i{width:20px;text-align:center;font-size:18px}
+/* Stories */
+.stories{display:flex;gap:14px;padding:20px 0;overflow-x:auto}
+.stories::-webkit-scrollbar{display:none}
+.story{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0}
+.story-ring{width:64px;height:64px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#00d4ff,#7b2ff7)}
+.story-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--bg)}
+.story-name{font-size:11px;opacity:.6;max-width:64px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Posts */
+.feed{max-width:100%}
+.post{background:var(--card);border-radius:16px;margin-bottom:20px;border:1px solid rgba(255,255,255,.04);overflow:hidden}
+.post-header{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.post-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.post-user{font-weight:600;font-size:14px}
+.post-time{font-size:11px;opacity:.4}
+.post-img{width:100%;max-height:450px;object-fit:cover}
+.post-actions{display:flex;align-items:center;gap:16px;padding:12px 16px}
+.action-btn{background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;transition:.3s;display:flex;align-items:center;gap:6px}
+.action-btn:hover{color:var(--accent)}
+.action-btn.liked{color:#ff4757}
+.action-btn .count{font-size:14px;font-weight:500}
+.post-actions .bookmark{margin-left:auto}
+.post-likes{padding:0 16px;font-size:14px;font-weight:600}
+.post-caption{padding:8px 16px;font-size:13px;line-height:1.5}
+.post-caption .username{font-weight:600}
+.post-comments{padding:4px 16px 6px;font-size:12px;opacity:.4;cursor:pointer}
+.comment-input{display:flex;gap:10px;padding:10px 16px;border-top:1px solid rgba(255,255,255,.04)}
+.comment-input input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:13px;font-family:'Poppins',sans-serif}
+.comment-input button{background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer;font-size:13px;font-family:'Poppins',sans-serif}
+/* Right sidebar */
+.right-sidebar{position:sticky;top:20px;height:fit-content}
+.widget{background:var(--card);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,.04);margin-bottom:18px}
+.widget h3{font-size:15px;margin-bottom:14px}
+.suggest-item{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.suggest-item img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+.suggest-info{flex:1}
+.suggest-name{font-size:13px;font-weight:600}
+.suggest-handle{font-size:11px;opacity:.4}
+.follow-btn{padding:6px 16px;border-radius:20px;border:1px solid var(--accent);background:none;color:var(--accent);font-size:12px;cursor:pointer;transition:.3s;font-family:'Poppins',sans-serif;font-weight:600}
+.follow-btn:hover,.follow-btn.following{background:var(--accent);color:var(--bg)}
+.trending-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer;transition:.3s}
+.trending-item:hover{padding-left:6px}
+.trending-item:last-child{border:none}
+.trending-cat{font-size:11px;opacity:.3}
+.trending-tag{font-size:14px;font-weight:600}
+.trending-count{font-size:11px;opacity:.3}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar,.right-sidebar{display:none}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+<div class="layout">
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a class="nav-item active"><i class="fa-solid fa-house"></i> Home</a>
+      <a class="nav-item"><i class="fa-solid fa-compass"></i> Explore</a>
+      <a class="nav-item"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a class="nav-item"><i class="fa-solid fa-envelope"></i> Messages</a>
+      <a class="nav-item"><i class="fa-solid fa-bookmark"></i> Saved</a>
+      <a class="nav-item"><i class="fa-solid fa-user"></i> Profile</a>
+    </nav>
+  </aside>
+  <main class="feed">
+    <div class="stories" id="stories"></div>
+    <div id="posts"></div>
+  </main>
+  <aside class="right-sidebar">
+    <div class="widget"><h3>Who to Follow</h3><div id="suggestions"></div></div>
+    <div class="widget"><h3>🔥 Trending</h3><div id="trending"></div></div>
+  </aside>
+</div>
+<script>
+// Stories
+const storyUsers=["Ashish","Priya","Rahul","Sneha","Amit","Neha"];
+document.getElementById("stories").innerHTML=storyUsers.map((n,i)=>`<div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/80?img=${i+10}" alt="${n}"></div><div class="story-name">${n}</div></div>`).join("");
+// Posts
+const posts=[
+  {user:"Ashish Varghese",avatar:"https://i.pravatar.cc/80?img=11",time:"2h ago",img:"https://picsum.photos/seed/devsetup/600/400",likes:234,caption:"New coding setup! Ready to build amazing things 🚀 #developer #webdev",comments:["Great setup! 🔥","Love the monitor!"]},
+  {user:"Priya Sharma",avatar:"https://i.pravatar.cc/80?img=12",time:"4h ago",img:"https://picsum.photos/seed/sunset99/600/400",likes:567,caption:"Beautiful sunset from my balcony today 🌅 #photography #nature",comments:["Stunning view!","Where is this?"]},
+  {user:"Rahul Dev",avatar:"https://i.pravatar.cc/80?img=13",time:"6h ago",img:"https://picsum.photos/seed/coffee88/600/400",likes:189,caption:"Coffee and code — the perfect combo ☕💻 #codinglife",comments:["Same here!","Productivity fuel 🔥"]},
+  {user:"Sneha Reddy",avatar:"https://i.pravatar.cc/80?img=14",time:"8h ago",img:"https://picsum.photos/seed/travel77/600/400",likes:892,caption:"Exploring new places and finding inspiration everywhere ✈️ #travel #wanderlust",comments:["So jealous!","Add this to the bucket list"]}
+];
+const postsEl=document.getElementById("posts");
+postsEl.innerHTML=posts.map((p,i)=>`<div class="post"><div class="post-header"><img class="post-avatar" src="${p.avatar}" alt="${p.user}"><div><div class="post-user">${p.user}</div><div class="post-time">${p.time}</div></div></div><img class="post-img" src="${p.img}" alt="Post" loading="lazy"><div class="post-actions"><button class="action-btn like-btn" data-i="${i}"><i class="fa-regular fa-heart"></i> <span class="count">${p.likes}</span></button><button class="action-btn"><i class="fa-regular fa-comment"></i> <span class="count">${p.comments.length}</span></button><button class="action-btn"><i class="fa-regular fa-paper-plane"></i></button><button class="action-btn bookmark"><i class="fa-regular fa-bookmark"></i></button></div><div class="post-likes">${p.likes.toLocaleString()} likes</div><div class="post-caption"><span class="username">${p.user.split(" ")[0].toLowerCase()}</span> ${p.caption}</div><div class="post-comments">View all ${p.comments.length} comments</div><div class="comment-input"><input type="text" placeholder="Add a comment..."><button>Post</button></div></div>`).join("");
+// Like toggle
+document.querySelectorAll(".like-btn").forEach(btn=>{btn.addEventListener("click",function(){const i=this.dataset.i;const liked=this.classList.toggle("liked");const icon=this.querySelector("i");icon.className=liked?"fa-solid fa-heart":"fa-regular fa-heart";const count=this.querySelector(".count");const base=posts[i].likes;count.textContent=liked?base+1:base})});
+// Suggestions
+const sugg=[{name:"Vikram Singh",handle:"@vikram_s",img:15},{name:"Neha Gupta",handle:"@neha.g",img:16},{name:"Arjun M.",handle:"@arjun_dev",img:17}];
+document.getElementById("suggestions").innerHTML=sugg.map(s=>`<div class="suggest-item"><img src="https://i.pravatar.cc/80?img=${s.img}" alt="${s.name}"><div class="suggest-info"><div class="suggest-name">${s.name}</div><div class="suggest-handle">${s.handle}</div></div><button class="follow-btn" onclick="this.classList.toggle('following');this.textContent=this.classList.contains('following')?'Following':'Follow'"">Follow</button></div>`).join("");
+// Trending
+const trends=[{cat:"Technology",tag:"#WebDevelopment",count:"12.4K posts"},{cat:"Design",tag:"#UIDesign",count:"8.9K posts"},{cat:"Programming",tag:"#JavaScript",count:"24.1K posts"},{cat:"Career",tag:"#FrontendDev",count:"6.3K posts"}];
+document.getElementById("trending").innerHTML=trends.map(t=>`<div class="trending-item"><div class="trending-cat">${t.cat}</div><div class="trending-tag">${t.tag}</div><div class="trending-count">${t.count}</div></div>`).join("");
+</script>
+</body>
+</html>
