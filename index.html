@@ -65,8 +65,9 @@
             </div>
         </section>
 
-        <!--  about section design  -->
         <section class="about" id="about">
+            <div class="about-lightning" id="aboutLightning"></div>
+            <div class="about-particles" id="aboutParticles"></div>
             <div class="about-img">
                 <img src="img/picofme (2).png" alt="About Ashish Varghese">
             </div>
@@ -109,6 +110,39 @@
                 <a href="#contact" class="btn">Contact Me</a>
             </div>
         </section>
+
+        <script>
+        // About lightning bolts
+        (function(){
+            const lc = document.getElementById('aboutLightning');
+            if(!lc) return;
+            for(let i = 0; i < 6; i++){
+                const b = document.createElement('div');
+                b.className = 'bolt';
+                b.style.left = (10 + Math.random() * 80) + '%';
+                b.style.animationDuration = (3 + Math.random() * 5) + 's';
+                b.style.animationDelay = (Math.random() * 6) + 's';
+                b.style.height = (40 + Math.random() * 60) + 'px';
+                lc.appendChild(b);
+            }
+        })();
+        // About particles
+        (function(){
+            const pc = document.getElementById('aboutParticles');
+            if(!pc) return;
+            for(let i = 0; i < 15; i++){
+                const p = document.createElement('div');
+                p.className = 'about-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.bottom = Math.random() * 30 + '%';
+                p.style.animationDuration = (4 + Math.random() * 6) + 's';
+                p.style.animationDelay = (Math.random() * 8) + 's';
+                p.style.width = (1 + Math.random() * 3) + 'px';
+                p.style.height = p.style.width;
+                pc.appendChild(p);
+            }
+        })();
+        </script>
 
         <!--  skills section design  -->
         <section class="skills" id="skills">
