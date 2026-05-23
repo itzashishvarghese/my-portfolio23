@@ -265,6 +265,7 @@
 
         <!--  contact section design  -->
         <section class="contact" id="contact">
+            <div class="contact-particles" id="contactParticles"></div>
             <h2 class="heading">Contact <span>Me!</span></h2>
             <p class="contact-subtitle">Have a project in mind? Let's work together!</p>
 
@@ -295,10 +296,28 @@
                     <textarea name="message" id="message-input" cols="30" rows="10" placeholder="Your Message" required></textarea>
                     <i class="fa-solid fa-message"></i>
                 </div>
-                <input type="submit" value="Send Message" class="btn" id="submit-btn">
+                <input type="submit" value="⚡ Send Message" class="btn" id="submit-btn">
                 <div class="form-message" id="form-message"></div>
             </form>
         </section>
+
+        <script>
+        // Contact particles
+        (function(){
+            const container = document.getElementById('contactParticles');
+            if(!container) return;
+            for(let i = 0; i < 20; i++){
+                const p = document.createElement('div');
+                p.className = 'c-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 6 + 4) + 's';
+                p.style.animationDelay = (Math.random() * 8) + 's';
+                p.style.width = (Math.random() * 3 + 1) + 'px';
+                p.style.height = p.style.width;
+                container.appendChild(p);
+            }
+        })();
+        </script>
 
         <!--  footer design  -->
         <footer class="footer">
