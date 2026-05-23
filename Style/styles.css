@@ -1433,7 +1433,13 @@ span {
     }
 
     .logo-tagline {
-        display: none;
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.4rem;
+        font-size: 0.85rem;
+        white-space: normal;
+        line-height: 1.4;
     }
 
     .footer {
