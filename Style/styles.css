@@ -105,6 +105,12 @@
 }
 
 /* ==================== THEME TOGGLE ==================== */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .theme-toggle {
     background: none;
     border: 2px solid rgba(0, 212, 255, 0.2);
@@ -114,14 +120,12 @@
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    margin-left: 2rem;
-    vertical-align: middle;
 }
 
 .theme-toggle:hover {
@@ -355,6 +359,11 @@ section {
     text-shadow: none;
     opacity: 0.9;
     filter: drop-shadow(0 0 6px rgba(0,212,255,0.4));
+}
+
+.navbar {
+    margin-left: auto;
+    margin-right: 3rem;
 }
 
 @keyframes taglineGlow {
@@ -1489,6 +1498,8 @@ span {
     }
 
     .navbar {
+        margin-left: 0;
+        margin-right: 0;
         position: absolute;
         top: 100%;
         left: 0;
@@ -1512,12 +1523,6 @@ span {
         font-size: 2rem;
         margin: 3rem 0;
         margin-left: 0;
-    }
-
-    .navbar .theme-toggle {
-        margin: 2rem auto;
-        margin-left: 0;
-        display: flex;
     }
 
     .home {
