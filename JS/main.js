@@ -352,4 +352,127 @@
     footerTopBtn.style.opacity = "0";
     footerTopBtn.style.visibility = "hidden";
   }
+
+  /* --------------------------------------------------------------------------
+     13. PRELOADER
+     -------------------------------------------------------------------------- */
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+        setTimeout(() => preloader.remove(), 600);
+      }, 1500);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     14. CUSTOM CURSOR
+     -------------------------------------------------------------------------- */
+  const cursorDot = document.getElementById("cursorDot");
+  const cursorOutline = document.getElementById("cursorOutline");
+
+  if (cursorDot && cursorOutline && window.matchMedia("(hover: hover)").matches) {
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX - 4 + "px";
+      cursorDot.style.top = mouseY - 4 + "px";
+    });
+
+    function animateOutline() {
+      outlineX += (mouseX - outlineX) * 0.15;
+      outlineY += (mouseY - outlineY) * 0.15;
+      cursorOutline.style.left = outlineX - 18 + "px";
+      cursorOutline.style.top = outlineY - 18 + "px";
+      requestAnimationFrame(animateOutline);
+    }
+    animateOutline();
+
+    // Hover effect on interactive elements
+    const hoverTargets = document.querySelectorAll("a, button, .btn, .portfolio-box, .services-box, .filter-btn, .social-media a, input, textarea, .card, .nav-link, .detail-item, .theme-toggle");
+    hoverTargets.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        cursorDot.classList.add("hover");
+        cursorOutline.classList.add("hover");
+      });
+      el.addEventListener("mouseleave", () => {
+        cursorDot.classList.remove("hover");
+        cursorOutline.classList.remove("hover");
+      });
+    });
+  } else {
+    // Hide cursor elements on touch devices
+    if (cursorDot) cursorDot.style.display = "none";
+    if (cursorOutline) cursorOutline.style.display = "none";
+  }
+
+  /* --------------------------------------------------------------------------
+     15. SCROLL PROGRESS BAR
+     -------------------------------------------------------------------------- */
+  const scrollProgress = document.getElementById("scrollProgress");
+
+  function updateScrollProgress() {
+    if (scrollProgress) {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      scrollProgress.style.width = progress + "%";
+    }
+  }
+
+  window.addEventListener("scroll", updateScrollProgress);
+
+  /* --------------------------------------------------------------------------
+     16. DARK / LIGHT MODE TOGGLE
+     -------------------------------------------------------------------------- */
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+
+  // Check saved preference
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+    if (themeIcon) themeIcon.className = "fa-solid fa-sun";
+  }
+
+  if (themeToggle && themeIcon) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      themeIcon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      themeIcon.style.transform = "rotate(360deg)";
+      setTimeout(() => (themeIcon.style.transform = ""), 500);
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     17. PORTFOLIO FILTER
+     -------------------------------------------------------------------------- */
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const portfolioBoxes = document.querySelectorAll(".portfolio-box");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Update active button
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.filter;
+
+      portfolioBoxes.forEach((box) => {
+        if (filter === "all" || box.dataset.category === filter) {
+          box.classList.remove("hidden");
+          box.style.position = "";
+        } else {
+          box.classList.add("hidden");
+        }
+      });
+    });
+  });
+
 })();

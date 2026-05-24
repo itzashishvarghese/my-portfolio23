@@ -9,6 +9,18 @@
         <meta name="keywords" content="Ashish Varghese, Frontend Developer, Web Designer, Portfolio, HTML, CSS, JavaScript, React">
         <meta name="author" content="Ashish Varghese">
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="img/favicon.png">
+        <link rel="apple-touch-icon" href="img/favicon.png">
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Ashish Varghese | Frontend Developer Portfolio">
+        <meta property="og:description" content="Explore the portfolio of Ashish Varghese — Frontend Developer & Web Designer. View projects, skills, and get in touch.">
+        <meta property="og:image" content="https://itzashishvarghese.github.io/my-portfolio23/img/favicon.png">
+        <meta property="og:url" content="https://itzashishvarghese.github.io/my-portfolio23/">
+        <meta property="og:type" content="website">
+        <meta name="twitter:card" content="summary_large_image">
+
         <!--  FONT AWESOME  -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -16,11 +28,32 @@
         <link rel="stylesheet" href="Style/styles.css">
     </head>
     <body>
+        <!-- Preloader -->
+        <div class="preloader" id="preloader">
+            <div class="preloader-inner">
+                <div class="preloader-ring"></div>
+                <div class="preloader-text">AV</div>
+            </div>
+            <p class="preloader-tagline">Loading Experience...</p>
+        </div>
+
+        <!-- Custom Cursor -->
+        <div class="cursor-dot" id="cursorDot"></div>
+        <div class="cursor-outline" id="cursorOutline"></div>
+
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress" id="scrollProgress"></div>
+
         <!--  header design  -->
         <header class="header" id="header">
             <a href="#home" class="logo">Ashish<span>.</span><span class="logo-tagline">&nbsp;| Turning Coffee Into Code</span></a>
 
-            <i class="fa-solid fa-bars" id="menu-icon"></i>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </div>
 
             <nav class="navbar" id="navbar">
                 <a href="#home" class="active">Home</a>
@@ -105,6 +138,16 @@
                             <h4>Phone</h4>
                             <p><a href="tel:+919465360761" style="color: var(--main-color); text-decoration: none;">+91 9465360761</a></p>
                         </div>
+                    </div>
+                </div>
+                <div class="currently-learning">
+                    <span class="learning-badge">
+                        <i class="fa-solid fa-rocket"></i> Currently Learning
+                    </span>
+                    <div class="learning-tags">
+                        <span class="learn-tag">React.js</span>
+                        <span class="learn-tag">Node.js</span>
+                        <span class="learn-tag">TypeScript</span>
                     </div>
                 </div>
                 <a href="#contact" class="btn">Contact Me</a>
@@ -240,8 +283,14 @@
         <!--  portfolio section design  -->
         <section class="portfolio" id="portfolio">
             <h2 class="heading">Latest <span>Projects</span></h2>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="clone">Clones</button>
+                <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+                <button class="filter-btn" data-filter="app">Apps</button>
+            </div>
             <div class="portfolio-container">
-                <div class="portfolio-box">
+                <div class="portfolio-box" data-category="clone">
                     <img src="img/youtube.png" alt="YouTube Clone Project">
                     <div class="portfolio-layer">
                         <h4>YouTube Clone</h4>
@@ -250,7 +299,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-box">
+                <div class="portfolio-box" data-category="clone">
                     <img src="img/spotify.png" alt="Spotify Clone Project">
                     <div class="portfolio-layer">
                         <h4>Spotify Clone</h4>
@@ -259,7 +308,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-box">
+                <div class="portfolio-box" data-category="clone">
                     <img src="img/iphone.png" alt="iPhone Clone Project">
                     <div class="portfolio-layer">
                         <h4>iPhone 15 Pro Landing Page</h4>
@@ -268,7 +317,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-box">
+                <div class="portfolio-box" data-category="app">
                     <img src="img/weather.png" alt="Weather Application Project">
                     <div class="portfolio-layer">
                         <h4>Weather App</h4>
@@ -277,7 +326,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-box">
+                <div class="portfolio-box" data-category="dashboard">
                     <img src="img/trading.png" alt="Crypto Trading Dashboard Project">
                     <div class="portfolio-layer">
                         <h4>Crypto Trading Dashboard</h4>
@@ -286,7 +335,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-box">
+                <div class="portfolio-box" data-category="clone">
                     <img src="img/netflix.png" alt="Netflix Clone Project">
                     <div class="portfolio-layer">
                         <h4>Netflix Clone</h4>
