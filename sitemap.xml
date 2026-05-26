@@ -3,7 +3,7 @@
 
   <!-- Main Portfolio Page -->
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/</loc>
+    <loc>https://itzashishvarghese.github.io/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -11,42 +11,42 @@
 
   <!-- Project Pages -->
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/projects/youtube.html</loc>
+    <loc>https://itzashishvarghese.github.io/projects/youtube.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/projects/spotify.html</loc>
+    <loc>https://itzashishvarghese.github.io/projects/spotify.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/projects/iphone.html</loc>
+    <loc>https://itzashishvarghese.github.io/projects/iphone.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/projects/weather.html</loc>
+    <loc>https://itzashishvarghese.github.io/projects/weather.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/projects/netflix.html</loc>
+    <loc>https://itzashishvarghese.github.io/projects/netflix.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://itzashishvarghese.github.io/my-portfolio23/projects/trading.html</loc>
+    <loc>https://itzashishvarghese.github.io/projects/trading.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>

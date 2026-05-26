@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://itzashishvarghese.github.io/my-portfolio23/sitemap.xml
+Sitemap: https://itzashishvarghese.github.io/sitemap.xml
