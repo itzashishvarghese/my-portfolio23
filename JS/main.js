@@ -358,12 +358,18 @@
      -------------------------------------------------------------------------- */
   const preloader = document.getElementById("preloader");
   if (preloader) {
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        preloader.classList.add("fade-out");
-        setTimeout(() => preloader.remove(), 600);
-      }, 1500);
-    });
+    // Hide immediately when page loads — no artificial delay
+    const hidePreloader = () => {
+      preloader.classList.add("fade-out");
+      setTimeout(() => preloader.remove(), 500);
+    };
+    if (document.readyState === "complete") {
+      hidePreloader();
+    } else {
+      window.addEventListener("load", hidePreloader);
+      // Safety fallback: force hide after 3 seconds no matter what
+      setTimeout(hidePreloader, 3000);
+    }
   }
 
 
